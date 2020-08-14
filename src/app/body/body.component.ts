@@ -7,7 +7,8 @@ import * as firebase from 'firebase'
   styleUrls: ['./body.component.scss']
 })
 export class BodyComponent implements OnInit {
-
+  username : string;
+  
   constructor() { }
 
   ngOnInit(): void {

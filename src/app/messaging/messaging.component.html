@@ -1,1 +1,7 @@
 <p>messaging works!</p>
+
+<mat-form-field>
+    <mat-label>Username</mat-label>
+    <input matInput [(ngModel)]="text"
+                    (keydown.enter)="submitText()">
+</mat-form-field>

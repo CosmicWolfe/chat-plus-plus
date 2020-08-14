@@ -2,3 +2,9 @@
 <p>body works!</p>
 <p>body works!</p>
 
+<div fxLayout="row">
+    <app-chats></app-chats>
+    <div fxLayout="column">
+        <app-messaging [username]="username"></app-messaging>
+    </div>
+</div>
