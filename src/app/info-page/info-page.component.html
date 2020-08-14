@@ -1,1 +1,8 @@
-<p>info-page works!</p>
+<!-- Old Code to show user avatar, display name, username, online
+    mat-card-header class="mat-card-header-positioning">
+    <img mat-card-avatar src={{userDetails.imageURL}} class="cursor-pointer" (click)="onSelectUser()">
+    <mat-icon [class.online]="millisecondsAfterLastOnline && millisecondsAfterLastOnline < 300000"  [class.away]="millisecondsAfterLastOnline && millisecondsAfterLastOnline >= 300000 && millisecondsAfterLastOnline < 900000" [class.offline]="!millisecondsAfterLastOnline || millisecondsAfterLastOnline >= 900000" class="online-icon">lens</mat-icon>
+    <mat-icon *ngIf="rank!='Member'" class="admin-icon">build</mat-icon>
+    <mat-card-title class="truncate cursor-pointer">displayname</mat-card-title>
+    <mat-card-subtitle class="truncate cursor-pointer user-name">username</mat-card-subtitle>
+</mat-card-header-->

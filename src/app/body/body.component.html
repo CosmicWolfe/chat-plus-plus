@@ -3,9 +3,9 @@
     <app-chats style="width: 20%; height: 100%;"></app-chats>
     <div fxLayout="column" fxLayoutAlign="space-between start" style="height: 100%; min-width: 0px; flex-grow: 1;">
         <!--Top Sidebar-->
-        <app-info-bar></app-info-bar>
+        <app-info-bar style="width: 100%;"></app-info-bar>
         <!--Messaging Part-->
-        <app-messaging [userID]="userID"
+        <app-messaging style="width: 100%;" [userID]="userID"
                [chatID]="1"></app-messaging>
     </div>
     <!--Right Sidebar, Codes (can expand/collapse)-->
