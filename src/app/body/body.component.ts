@@ -7,7 +7,7 @@ import * as firebase from 'firebase'
   styleUrls: ['./body.component.scss']
 })
 export class BodyComponent implements OnInit {
-  username : string;
+  userID : string;
 
   constructor() { }
 
@@ -24,6 +24,8 @@ export class BodyComponent implements OnInit {
     };
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
+
+    this.userID = "1";
   }
 
 }

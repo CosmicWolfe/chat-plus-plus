@@ -11,20 +11,27 @@ import { MessagingService } from '../services/messaging.service';
   styleUrls: ['./messaging.component.scss']
 })
 export class MessagingComponent implements OnInit {
-  @Input("username") username : string;
+  @Input("userID") userID : string;
+  @Input("chatID") chatID : string;
 
   text : string;
   ctr : number;
+  messages : Object[];
+  newMessage : string;
   constructor(private messagingService: MessagingService) { }
 
   ngOnInit(): void {
+    this.messages = this.messagingService.getChats(this.chatID);
     this.ctr = 0;
   }
 
-  public submitText() {
-    console.log("O");
-    this.ctr++;
-    this.messagingService.addChat(this.ctr, 1, "PO" + String(this.ctr));
-  }
+  public sendMessage() {
+    if (this.newMessage) {
+      this.ctr = (this.ctr % 2) + 1;
+      this.messagingService.addChat(this.chatID, String(this.ctr), this.newMessage)
+      console.log(this.newMessage);
 
+      this.newMessage = "";
+    }
+  }
 }

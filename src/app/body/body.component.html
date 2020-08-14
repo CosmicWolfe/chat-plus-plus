@@ -5,7 +5,8 @@
         <!--Top Sidebar-->
         <app-info-bar></app-info-bar>
         <!--Messaging Part-->
-        <app-messaging></app-messaging>
+        <app-messaging [userID]="userID"
+               [chatID]="1"></app-messaging>
     </div>
     <!--Right Sidebar, Codes (can expand/collapse)-->
     <app-codes-list style="width: fit-content; height: 100%;"></app-codes-list>
