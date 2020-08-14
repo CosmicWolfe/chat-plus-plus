@@ -5,14 +5,24 @@ import * as firebase from 'firebase'
   providedIn: 'root'
 })
 export class MessagingService {
+  messages : Object[]
+  
+  constructor() { this.messages = [] }
 
-  constructor() { }
-
-  public addChat(chatID : number, userID : number, text : string) {
+  public addChat(chatID : string, userID : string, text : string) {
+    this.messages.push({
+      text : text,
+      userID : userID
+    });
+    /*
     console.log("PO");
-    firebase.database().ref('chats/' + String(chatID)).set({
+    firebase.database().ref('chats/' + chatID).set({
       userID: userID,
       text: text
-    });
+    });*/
+  }
+
+  public getChats(chatID : string) {
+    return this.messages;
   }
 }

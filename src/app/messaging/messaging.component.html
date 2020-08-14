@@ -1,7 +1,50 @@
-<p>messaging works!</p>
-
-<mat-form-field>
-    <mat-label>Username</mat-label>
-    <input matInput [(ngModel)]="text"
-                    (keydown.enter)="submitText()">
-</mat-form-field>
+<div class="mesgs">
+    <div class="msg_history">
+        <li class="message" *ngFor="let message of messages">
+            <div
+            *ngIf="
+                message.userID !== userID;
+                then incoming_msg;
+                else outgoing_msg
+            "
+            ></div>
+            <ng-template #incoming_msg>
+            <div class="incoming_msg">
+                <div class="incoming_msg_img">
+                <img
+                    src="https://i.imgur.com/k2PZLZa.png"
+                    alt="User avatar"
+                />
+                </div>
+                <div class="received_msg">
+                <div class="received_withd_msg">
+                    <p>{{ message.text }}</p>
+                </div>
+                </div>
+            </div>
+            </ng-template>
+            <ng-template #outgoing_msg>
+            <div class="outgoing_msg">
+                <div class="sent_msg">
+                <p>{{ message.text }}</p>
+                </div>
+            </div>
+            </ng-template>
+        </li>
+    </div>
+    
+    <div class="type_msg">
+      <form class="input_msg_write">
+        <input
+          type="text"
+          class="write_msg"
+          placeholder="Type a message"
+          name="newMessage"
+          [(ngModel)]="newMessage"
+        />
+        <button class="msg_send_btn" type="button" (click)="sendMessage()">
+          <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+        </button>
+      </form>
+    </div>
+</div>
