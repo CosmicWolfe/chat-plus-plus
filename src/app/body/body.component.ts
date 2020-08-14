@@ -8,7 +8,7 @@ import * as firebase from 'firebase'
 })
 export class BodyComponent implements OnInit {
   username : string;
-  
+
   constructor() { }
 
   ngOnInit(): void {
@@ -24,10 +24,6 @@ export class BodyComponent implements OnInit {
     };
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
-    var child1 = firebase.database().ref().child('child1');
-    child1.on('value', snap => console.log(snap.val()));
-    child1.set(123);
-    
   }
 
 }
