@@ -12,6 +12,29 @@ import { InfoPageComponent } from './info-page/info-page.component';
 import { CodesListComponent } from './codes-list/codes-list.component';
 import { CodeWidgetComponent } from './code-widget/code-widget.component';
 import { MessagingComponent } from './messaging/messaging.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { FlexLayoutModule } from "@angular/flex-layout";
+
+import { MatTableModule} from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatDividerModule } from '@angular/material/divider';
+import { ReactiveFormsModule} from '@angular/forms';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTooltipModule, TooltipPosition } from '@angular/material/tooltip';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatExpansionModule } from '@angular/material/expansion';
+
 
 @NgModule({
   declarations: [
@@ -28,9 +51,31 @@ import { MessagingComponent } from './messaging/messaging.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatInputModule,
+    MatButtonModule,
+    MatPaginatorModule,
+    MatSortModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FlexLayoutModule,
+    MatFormFieldModule,
+    MatTooltipModule,
+    MatDividerModule,
+    MatSlideToggleModule,
+    MatButtonToggleModule,
+    MatProgressSpinnerModule,
+    MatIconModule,
+    MatCheckboxModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
+

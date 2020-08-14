@@ -1,1 +1,15 @@
+
 <p>login works!</p>
+
+<mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput placeholder="Enter email"
+                    [(ngModel)]="email">
+</mat-form-field>
+<br>
+<mat-form-field>
+    <mat-label>Password</mat-label>
+    <input matInput placeholder="Enter Password"
+                    [(ngModel)]="password"
+                    (keydown.enter)="logout()">         
+</mat-form-field>
