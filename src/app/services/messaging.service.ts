@@ -10,19 +10,28 @@ export class MessagingService {
   constructor() { this.messages = [] }
 
   public addChat(chatID : string, userID : string, text : string) {
-    this.messages.push({
-      text : text,
-      userID : userID
+    var newPostRef = firebase.database().ref('chatMessages/' + chatID).push();
+    newPostRef.set({
+        text : text,
+        userID : userID,
+        timeStamp : Date.now(),
+        messageID : String(newPostRef.key)
     });
-    /*
-    console.log("PO");
-    firebase.database().ref('chats/' + chatID).set({
-      userID: userID,
-      text: text
-    });*/
   }
 
   public getChats(chatID : string) {
+    this.messages = [];
+    firebase.database().ref('chatMessages/' + chatID).once('value', (snapshot) => {
+      snapshot.forEach((childSnapshot) => {
+        var childKey = childSnapshot.key;
+        var childData = childSnapshot.val();
+
+        this.messages.push({
+          text : childData.text,
+          userID : childData.userID
+        });
+      });
+    });
     return this.messages;
   }
 }
