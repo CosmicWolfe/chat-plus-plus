@@ -8,10 +8,12 @@ import * as firebase from 'firebase'
 })
 export class BodyComponent implements OnInit {
   userID : string;
+  activeChatId : string;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.activeChatId = '1';
     var firebaseConfig = {
       apiKey: "AIzaSyB7lbkpXJdGH4SDInVfBxWryJc6FXDXZ1E",
       authDomain: "chat-plus-plus.firebaseapp.com",
@@ -26,6 +28,10 @@ export class BodyComponent implements OnInit {
     firebase.initializeApp(firebaseConfig);
 
     this.userID = "1";
+  }
+
+  changeChat(chatId: string) {
+    this.activeChatId = chatId;
   }
 
 }

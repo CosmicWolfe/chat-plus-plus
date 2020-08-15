@@ -1,12 +1,13 @@
 <div fxLayout="row" style="min-width: 600px; width: 100%; height: 100%;">
     <!--Left Sidebar-->
-    <app-chats style="width: 20%; height: 100%;"></app-chats>
+    <app-chats style="width: 20%; height: 100%;"
+        (changeChatEvent)="changeChat($event)"></app-chats>
     <div fxLayout="column" fxLayoutAlign="space-between start" style="height: 100%; min-width: 0px; flex-grow: 1;">
         <!--Top Sidebar-->
         <app-info-bar style="width: 100%;"></app-info-bar>
         <!--Messaging Part-->
         <app-messaging style="width: 100%;" [userID]="userID"
-               [chatID]="1"></app-messaging>
+               [chatID]="activeChatId"></app-messaging>
     </div>
     <!--Right Sidebar, Codes (can expand/collapse)-->
     <app-codes-list style="width: fit-content; height: 100%;"></app-codes-list>
