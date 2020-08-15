@@ -36,6 +36,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SignupComponent } from './signup/signup.component';
+import { AddFriendComponent } from './add-friend/add-friend.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { SignupComponent } from './signup/signup.component';
     CodesListComponent,
     CodeWidgetComponent,
     MessagingComponent,
-    SignupComponent
+    SignupComponent,
+    AddFriendComponent
   ],
   imports: [
     BrowserModule,
