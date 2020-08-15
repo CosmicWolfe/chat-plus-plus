@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, SimpleChanges, Input } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
@@ -32,6 +32,12 @@ export class MessagingComponent implements OnInit {
       console.log(this.newMessage);
 
       this.newMessage = "";
+    }
+  }
+
+  ngOnChanges(changes : SimpleChanges): void {
+    if (changes.chatID) {
+      this.messages = this.messagingService.getChats(this.chatID);
     }
   }
 }
