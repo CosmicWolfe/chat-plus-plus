@@ -1,4 +1,4 @@
-<div class="mesgs" fxLayout="column" fxLayoutAlign="start start">
+<div *ngIf="chatID" class="mesgs" fxLayout="column" fxLayoutAlign="start start">
     <div class="msg_history">
         <li class="message" *ngFor="let message of messages">
             <div *ngIf="message.userID !== userID" class="incoming_msg">
@@ -39,5 +39,11 @@
             <mat-icon style="margin-top: 3px;">send</mat-icon>
         </button>
       </form>
+    </div>
+</div>
+
+<div *ngIf="!chatID" fxLayout="row" fxLayoutAlign="center center" style="height: 100%; width: 100%;">
+    <div style="font-size: 36px;">
+        Choose a chat!
     </div>
 </div>

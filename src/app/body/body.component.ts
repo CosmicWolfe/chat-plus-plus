@@ -15,7 +15,6 @@ export class BodyComponent implements OnInit {
   constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
-    this.activeChatId = '1';
     this.userID = this.userService.getLoggedID();
     if(!this.userID){
       this.router.navigate(['login']);
@@ -26,16 +25,5 @@ export class BodyComponent implements OnInit {
 
   changeChat(chatId: string) {
     this.activeChatId = chatId;
-  }
-
-  hidden : boolean;
-  async click() {
-    await this.delay(10000);
-    this.hidden = true;
-  }
-
-
-  public delay(ms: number) {
-      return new Promise( resolve => setTimeout(resolve, ms) );
   }
 }
