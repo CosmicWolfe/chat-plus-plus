@@ -55,7 +55,23 @@ export class UserService {
   }
 
   public async setProperty(uid:string, type:string, val:string){
-    await this.userDetailsRef.child(uid+"/"+type).set({type:val});
+    await firebase.database().ref().child("userDetails/"+uid+'/'+type).set(val);
+  }
+
+  public async getMembers(chatid:string){
+    var members : string[];
+    await firebase.database().ref().child("chatMembers/"+chatid).once('value',(data)=>{
+      members = Object.keys(data.val());
+    });
+    return members;
+  }
+
+  public async getChats(uid:string){
+    var chats : string[];
+    await firebase.database().ref().child("userDetails/"+uid+'/chatList').once('value',(data)=>{
+      chats = Object.keys(data.val());
+    });
+    return chats;
   }
 
   public async getUserNameSearch(searchString: string, numResults: number) {

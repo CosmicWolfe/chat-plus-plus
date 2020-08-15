@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon'
 import { MatDividerModule } from '@angular/material/divider';
 import { FormsModule } from '@angular/forms';
-import * as firebase from 'firebase';
+import { UserService } from '../services/user.service';
+
 
 @Component({
   selector: 'app-info-page',
@@ -15,15 +16,12 @@ export class InfoPageComponent implements OnInit {
   userid : string[];
 
   tags = ['c++','python','html','angular','java','succ','thicc','thighs'];
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.userid = [];
-    var ref = firebase.database().ref().child('chatMembers/'+this.groupid);
-    ref.once('value',function(dataSnapshot) {
-      this.userid = Object.keys(dataSnapshot.val());
-    },this);
-
+    this.userService.getMembers(this.groupid).then((members)=>{
+      this.userid = members;
+    });
   }
   
   invitefriends()  {
