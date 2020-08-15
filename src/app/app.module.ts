@@ -40,7 +40,7 @@ import { AddFriendComponent } from './add-friend/add-friend.component';
 import { AddGroupChatComponent } from './add-group-chat/add-group-chat.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCardModule } from '@angular/material/card';
-
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -82,7 +82,8 @@ import { MatCardModule } from '@angular/material/card';
     MatExpansionModule,
     MatDialogModule,
     MatAutocompleteModule,
-    MatCardModule
+    MatCardModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
