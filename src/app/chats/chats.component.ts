@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 import * as firebase from 'firebase';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AddFriendComponent } from '../add-friend/add-friend.component';
-import { AddGroupComponent } from '../add-group/add-group.component';
 import { UserService } from '../services/user.service';
 import { MessagingService } from '../services/messaging.service';
 
@@ -98,7 +97,7 @@ export class ChatsComponent implements OnInit {
         usersToExclude.push(this.friendChats[i].privateOtherUserId);
       }
       dialogConfig.data.usersToExclude = usersToExclude;
-      this.dialog.open(AddGroupComponent, dialogConfig);
+      //this.dialog.open(AddGroupComponent, dialogConfig);
     }
   }
 
