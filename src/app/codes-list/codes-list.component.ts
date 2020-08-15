@@ -34,6 +34,7 @@ export class CodesListComponent implements OnInit {
   }
 
   public expandToggle() {
+    console.log("COL");
     this.expanded = !this.expanded;
   }
 

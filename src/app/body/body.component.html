@@ -12,6 +12,7 @@
                        [chatID]="activeChatId"></app-messaging>
     </div>
     <!--Right Sidebar, Codes (can expand/collapse)-->
-    <app-codes-list style="max-width: 300px; height: 100%;"
-                    [chatID]="activeChatId"></app-codes-list>
+    <app-codes-list style="max-width: 600px; height: 100%;"
+                    [chatID]="activeChatId"
+                    [hidden]="!activeChatId"></app-codes-list>
 </div>

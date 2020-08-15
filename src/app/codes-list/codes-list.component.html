@@ -3,10 +3,11 @@
     <div fxLayout="column" 
          fxLayoutAlign="center center"
         style="height: inherit; background-color: grey;">
-        <mat-icon [hidden]="expanded"  (click)="expandToggle()">chevron_left</mat-icon>
+        <mat-icon (click)="expandToggle()">chevron_left</mat-icon>
     </div>
     <!-- Code Lists -->
-    <div style="height: inherit; overflow-y: scroll"
+    <div class="code-list"
+         style="height: inherit; overflow-y: scroll"
          [hidden]="expanded"
          fxLayout="column"
          fxLayoutGap="24px"> 
