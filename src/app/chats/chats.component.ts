@@ -8,6 +8,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AddFriendComponent } from '../add-friend/add-friend.component';
 import { UserService } from '../services/user.service';
 import { MessagingService } from '../services/messaging.service';
+import { AddGroupChatComponent } from '../add-group-chat/add-group-chat.component';
 
 
 @Component({
@@ -135,7 +136,7 @@ export class ChatsComponent implements OnInit {
         usersToExclude.push(this.friendChats[i].privateOtherUserId);
       }
       dialogConfig.data.usersToExclude = usersToExclude;
-      //this.dialog.open(AddGroupComponent, dialogConfig);
+      this.dialog.open(AddGroupChatComponent, dialogConfig);
     }
   }
 

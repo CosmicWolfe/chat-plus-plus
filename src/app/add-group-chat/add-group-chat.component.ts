@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
+import {MatListModule} from '@angular/material/list';
 
 @Component({
   selector: 'app-add-group-chat',
@@ -9,29 +10,30 @@ import { UserService } from '../services/user.service';
 export class AddGroupChatComponent implements OnInit {
   
   searchkey:string;
-  group:string[];
+  group : string[];
   result : any;
   searchusers:string[];
-
+  friends:string[];
+  filtered_friends:string[];
 
   constructor( private userService: UserService) { }
   
-    ngOnInit(): void {
-      
+  ngOnInit(): void {
+    this.friends = ["1","2"];
+    // this.friends = this.userService.getFriends();
+    this.filtered_friends = this.friends;
+    this.group = [];
   }
 
   async search(){
-    this.result = await this.userService.getUserNameSearch(this.searchkey,10);
-    console.log(this.result);
     
   }
+
   invite(user: string){
+    if(this.group.includes(user))
+      return;
     this.group.push(user);
+    console.log(this.group);
   }
 }
-// TODO
-// search form
-// list of ppl
-// add ppl
-// create chat
 
