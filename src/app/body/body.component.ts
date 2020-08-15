@@ -22,8 +22,9 @@ export class BodyComponent implements OnInit {
       this.router.navigate(['login']);
       return;
     }
-    //this.userService.getChats(this.userID).then((x)=>this.chatIDs=x);
-    
+    // this.userService.getChats(this.userID).then((x)=>this.chatIDs=x);
+
+    // this.activeChatId = this.chatIDs[0];
   }
 
   changeChat(chatId: string) {

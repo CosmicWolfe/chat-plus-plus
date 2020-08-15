@@ -22,5 +22,19 @@
   <app-root></app-root>
 
 </body>
+<script>SEC_HTTPS = true;
+  SEC_BASE = "compilers.widgets.sphere-engine.com"; 
+  (function(d, s, id){ SEC = window.SEC || (window.SEC = []);
+    var js, fjs = d.getElementsByTagName(s)[0];
+    console.log("POXX");
+    if (d.getElementById(id)) return; 
+    console.log("PSSO");
+    
+    js = d.createElement(s); js.id = id; 
+    js.src = (SEC_HTTPS ? "https" : "http") + "://" + SEC_BASE + "/static/sdk/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);   
+  }(document, "script", "sphere-engine-compilers-jssdk"));
+SEC.ready=function(e){"loading"!=document.readyState&&"interactive"!=document.readyState?e():window.addEventListener("load",e)};
+</script>
 
 </html>
