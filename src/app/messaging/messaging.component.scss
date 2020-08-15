@@ -200,7 +200,7 @@ img {
 	height: 33px;
 	position: absolute;
 	right: 0;
-	top: 11px;
+	top: 16px;
 	width: 33px;
 }
 
@@ -209,7 +209,8 @@ img {
 }
 
 .msg_history {
-	height: inherit;
+	height: 100%;
+	width: 100%;
 	overflow-y: auto;
 }
 

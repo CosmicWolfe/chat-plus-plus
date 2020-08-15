@@ -1,13 +1,25 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { BodyComponent } from './body/body.component';
+import { LoginComponent } from './login/login.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ChatsComponent } from './chats/chats.component';
+import { InfoBarComponent } from './info-bar/info-bar.component';
+import { InfoPageComponent } from './info-page/info-page.component';
+import { CodesListComponent } from './codes-list/codes-list.component';
+import { CodeWidgetComponent } from './code-widget/code-widget.component';
+import { MessagingComponent } from './messaging/messaging.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from "@angular/flex-layout";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatTableModule} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -23,16 +35,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
+import { SignupComponent } from './signup/signup.component';
 
-import { BodyComponent } from './body/body.component';
-import { LoginComponent } from './login/login.component';
-import { ProfileComponent } from './profile/profile.component';
-import { ChatsComponent } from './chats/chats.component';
-import { InfoBarComponent } from './info-bar/info-bar.component';
-import { InfoPageComponent } from './info-page/info-page.component';
-import { CodesListComponent } from './codes-list/codes-list.component';
-import { CodeWidgetComponent } from './code-widget/code-widget.component';
-import { MessagingComponent } from './messaging/messaging.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +49,8 @@ import { MessagingComponent } from './messaging/messaging.component';
     InfoPageComponent,
     CodesListComponent,
     CodeWidgetComponent,
-    MessagingComponent
+    MessagingComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +62,6 @@ import { MessagingComponent } from './messaging/messaging.component';
     MatButtonModule,
     MatPaginatorModule,
     MatSortModule,
-    MatDialogModule,
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
@@ -69,9 +73,13 @@ import { MessagingComponent } from './messaging/messaging.component';
     MatProgressSpinnerModule,
     MatIconModule,
     MatCheckboxModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
+
