@@ -55,12 +55,15 @@ export class CodeService {
   }
 
   public refreshCodes() {
-    SEC = window.SEC || (window.SEC = []);
+    let SEC = (window as any).SEC || ((window as any).SEC = []);
     var js, fjs = document.getElementsByTagName("script")[0];
 
     js = document.createElement("script");
     
     js.id = "sphere-engine-compilers-jssdk"; 
+
+    let SEC_HTTPS = true;
+    let SEC_BASE = "compilers.widgets.sphere-engine.com"; 
     js.src = (SEC_HTTPS ? "https" : "http") + "://" + SEC_BASE + "/static/sdk/sdk.js";
     fjs.parentNode.insertBefore(js, fjs);
   }

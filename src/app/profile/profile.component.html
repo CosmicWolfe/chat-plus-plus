@@ -1,1 +1,44 @@
-<p>profile works! this is a  new page</p>
+<div style="height: 100vh; width: 100vw" fxLayout="column" fxLayoutAlign="center center">
+
+    <div fxLayout="column" fxLayoutGap="16px">
+
+      <button mat-raised-button color="primary" (click) = "goHome()">home</button>
+
+        <span *ngIf = "match" ng-hide ="editing">
+          <button (click)= "NewName.enable()">Edit Name</button>
+        </span>
+
+        <span ng-show="editing">
+
+          <mat-form-field appearance="standard" style="width: 250px;">
+            <!-- <mat-label>Username</mat-label> -->
+            <input matInput placeholder="{{Name}}" [formControl]="NewName" required>
+          </mat-form-field>
+
+          <button *ngIf = "match" (click)="NewName.disable(); save(NewName.value,'userName')">Save</button>
+        </span>
+
+        <!-- EMAIL -->
+        <span *ngIf = "match" ng-hide="editing">
+          <button (click)="NewEmail.enable()">Edit email</button>
+        </span>
+
+        <span ng-show="editing">
+          <mat-form-field appearance="standard" style="width: 250px;">
+            <mat-label>{{email}}</mat-label>
+            <input matInput [formControl]="NewEmail" required>
+          </mat-form-field>
+
+          <button *ngIf = "match" (click)="NewEmail.disable(); save(NewEmail.value,'email')">Save</button>
+        </span>
+
+
+
+
+
+
+    </div>
+
+
+</div>
+
