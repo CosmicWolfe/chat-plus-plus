@@ -136,7 +136,15 @@ export class ChatsComponent implements OnInit {
       })
     } else {  
       for (let i = 0; i < this.friendChats.length; i++) {
-        usersToExclude.push(this.friendChats[i].privateOtherUserId);
+        let members = await this.messagingService.getChatMembers(this.friendChats[i].chatID);
+        let otherUserId;
+        for (let j = 0; j < members.length; j++) {
+          if (members[j] != this.currentUserId) {
+            otherUserId = members[j];
+            break;
+          }
+        }
+        usersToExclude.push(otherUserId);
       }
       dialogConfig.data.usersToExclude = usersToExclude;
       this.dialog.open(AddGroupChatComponent, dialogConfig);

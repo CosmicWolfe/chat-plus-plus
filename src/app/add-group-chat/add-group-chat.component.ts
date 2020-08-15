@@ -23,6 +23,7 @@ export class AddGroupChatComponent implements OnInit {
   removable = true;
   invCtrl = new FormControl();
   group:string[];
+  friendsID:string[];
   friends:string[];
   filteredFriends: Observable<string[]>;
 
@@ -35,15 +36,26 @@ export class AddGroupChatComponent implements OnInit {
     private userService: UserService, 
     private messagingService : MessagingService) {
       this.group = [];
-      this.friends = data.usersToExclude;
+      this.friendsID = data.usersToExclude;
+      this.friends = [];
+      
+      
       console.log('group',this.friends);
      }
   
   ngOnInit(): void {
     // this.friends = ["a","b","c","d","e"];
     this.authorID = this.userService.getLoggedID();
-    
-    this.filteredFriends = this.invCtrl.valueChanges.pipe(startWith(null),map((fruit: string | null) => fruit ? this._filter(fruit) : this.friends.slice()));
+    this.init();
+    this.filteredFriends = this.invCtrl.valueChanges.pipe(startWith(null),map((friend: string | null) => friend ? this._filter(friend) : this.friends.slice()));
+  }
+
+  async init(){
+    for(let i in this.friendsID){
+      var id = this.friendsID[i];
+      var username = await this.userService.getProperty(id,"userName");
+      this.friends.push(username);
+    }
   }
 
   async addGroup(){
