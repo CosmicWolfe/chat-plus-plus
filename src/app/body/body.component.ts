@@ -7,10 +7,13 @@ import * as firebase from 'firebase'
   styleUrls: ['./body.component.scss']
 })
 export class BodyComponent implements OnInit {
+  userID : string;
+  activeChatId : string;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.activeChatId = '1';
     var firebaseConfig = {
       apiKey: "AIzaSyB7lbkpXJdGH4SDInVfBxWryJc6FXDXZ1E",
       authDomain: "chat-plus-plus.firebaseapp.com",
@@ -24,12 +27,11 @@ export class BodyComponent implements OnInit {
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
 
-    
-    var child1 = firebase.database().ref().child('child1');
-    child1.on('value', snap => console.log(snap.val()));
-    child1.set(123);
-    
+    this.userID = "1";
+  }
 
+  changeChat(chatId: string) {
+    this.activeChatId = chatId;
   }
 
 }

@@ -1,1 +1,11 @@
-<p>codes-list works!</p>
+<div fxLayout="row" style="height: inherit;">
+    <!--Expand/Collapse Button (change to chevron_right if open)-->
+    <div fxLayout="column" 
+         fxLayoutAlign="center center"
+        style="height: inherit; background-color: grey;">
+        <mat-icon [hidden]="expanded"  (click)="expandToggle()">chevron_left</mat-icon>
+    </div>
+    <!-- Code Lists -->
+    <div style="height: inherit;"
+        [hidden]="expanded"> POPO dedededededededededdededdedededededede </div>
+</div>

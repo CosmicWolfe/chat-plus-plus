@@ -1,1 +1,51 @@
-<p>messaging works!</p>
+<div class="mesgs" fxLayout="column" fxLayoutAlign="start start">
+    <div class="msg_history">
+        <li class="message" *ngFor="let message of messages">
+            <div
+            *ngIf="
+                message.userID !== userID;
+                then incoming_msg;
+                else outgoing_msg
+            "
+            ></div>
+            <ng-template #incoming_msg>
+            <div class="incoming_msg">
+                <div class="incoming_msg_img">
+                <img
+                    src="https://i.imgur.com/k2PZLZa.png"
+                    alt="User avatar"
+                />
+                </div>
+                <div class="received_msg">
+                <div class="received_withd_msg">
+                    <p>{{ message.text }}</p>
+                </div>
+                </div>
+            </div>
+            </ng-template>
+            <ng-template #outgoing_msg>
+            <div class="outgoing_msg">
+                <div class="sent_msg">
+                <p>{{ message.text }}</p>
+                </div>
+            </div>
+            </ng-template>
+        </li>
+    </div>
+    
+    <div class="type_msg">
+      <form class="input_msg_write">
+        <input
+          type="text"
+          class="write_msg"
+          placeholder="Type a message"
+          name="newMessage"
+          [(ngModel)]="newMessage"
+          style="padding-left: 6px;"
+        />
+        <button class="msg_send_btn" type="button" (click)="sendMessage()">
+            <mat-icon style="margin-top: 3px;">send</mat-icon>
+        </button>
+      </form>
+    </div>
+</div>
