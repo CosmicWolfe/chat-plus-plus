@@ -13,7 +13,6 @@ import {Router} from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
 
-  editing:boolean;
   uid:string;
   Name:string;
   email:string;
@@ -27,17 +26,20 @@ export class ProfileComponent implements OnInit {
   save(New:string, typee:string){
     this.userService.setProperty(this.uid,typee,New)
     console.log("changes are made");
+    
   }
 
   async init(){
-    this.uid = this.userService.getLoggedID()
+    this.user = this.userService.getLoggedID()
+    this.uid = this.route.snapshot.paramMap.get("userId");
     this.Name = await this.userService.getProperty(this.uid, "userName")
     this.email = await this.userService.getProperty(this.uid, "email")
-
+    this.NewEmail.disable();
+    this.NewName.disable();
   }
 
   check(){
-    this.user = this.route.snapshot.paramMap.get("userId");
+    
     console.log(this.user);
     console.log(this.uid);
     if(this.user != this.uid){
