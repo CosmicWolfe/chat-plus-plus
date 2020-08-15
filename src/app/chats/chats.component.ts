@@ -58,8 +58,8 @@ export class ChatsComponent implements OnInit {
     })
   }
 
-  handleChangeChat(chatId: string)  {
-    this.changeChatEvent.emit(chatId);
+  handleChangeChat(chat)  {
+    this.changeChatEvent.emit(chat.chatID);
   }
 
   changeFriendsView(isFriendsView) {
