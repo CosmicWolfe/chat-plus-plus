@@ -16,15 +16,14 @@ export class BodyComponent implements OnInit {
   constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
-    // this.activeChatId = '1';
+    this.activeChatId = '1';
     this.userID = this.userService.getLoggedID();
     if(!this.userID){
-      // this.router.navigate(['login']);
-      // return;
+      this.router.navigate(['login']);
+      return;
     }
-    this.userService.getChats(this.userID).then((x)=>this.chatIDs=x);
+    //this.userService.getChats(this.userID).then((x)=>this.chatIDs=x);
     
-    this.activeChatId = this.chatIDs[0];
   }
 
   changeChat(chatId: string) {
