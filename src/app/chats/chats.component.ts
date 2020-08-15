@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon'
 import { MatDividerModule } from '@angular/material/divider';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-chats',

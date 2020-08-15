@@ -1,0 +1,33 @@
+.mat-icon {
+  font-size: 100px;
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.left{
+  width: 100px;
+
+}
+.right{
+  right:40%;
+}
+
+.groupinfo{
+  width: 300px;
+  height: 200px;
+  border: 1px solid #000000;
+  padding: 20px;
+  overflow: auto;
+}
+
+.centerH{
+  text-align: center !important;
+  display: Block !important;
+}
+

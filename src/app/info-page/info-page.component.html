@@ -5,7 +5,47 @@
     <mat-icon *ngIf="rank!='Member'" class="admin-icon">build</mat-icon>
     <mat-card-title class="truncate cursor-pointer">displayname</mat-card-title>
     <mat-card-subtitle class="truncate cursor-pointer user-name">username</mat-card-subtitle>
-</mat-card-header-->
+</mat-card-header -->
+
+<div fxLayout="column" fxLayoutAlign="space-between" style="height: 100%; width: 100%;">
+
+  <!-- list of tags displayed here -->
+
+      <mat-icon>groups</mat-icon>
+
+
+
+  <button (click)="invitefriends()">invite</button>
+  <div style="height: 600px;">
+
+
+    <div class="center">
+      <!--Scrollable list of groups/friends-->
+      <div class = "groupinfo">
+
+
+          <div fxLayout="row" fxLayoutGap="16px" >
+            <button *ngFor="let tag of tags">{{tag}}</button>
+          </div>
+
+          <mat-divider></mat-divider>
+
+            <div fxLayout="column" fxLayoutGap="16px" >
+              <!-- iterate through the list here -->
+              <button *ngFor="let user of userid">{{user}}</button>
+
+            </div>
+
+
+      </div>
+    </div>
+
+
+  </div>
+
+
+</div>
 
 I am group info.
 Fear me
+No fear meeeeeee

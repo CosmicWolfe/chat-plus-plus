@@ -11,6 +11,7 @@
         <!--Scrollable list of groups/friends-->
         <div fxLayout="column" fxLayoutGap="16px" style="overflow: scroll">
             <!--iterate through the list here-->
+
             <button *ngFor="let chat of chats" (click)="handleChangeChat(chat)">{{chat}}</button>
         </div>
     </div>
