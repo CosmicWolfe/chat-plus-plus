@@ -32,9 +32,6 @@ export class MessagingComponent implements OnInit {
       console.log(this.newMessage);
 
       this.newMessage = "";
-
-      this.messages = this.messagingService.getChats(this.chatID);
-      console.log(this.messages.length);
     }
   }
 }
