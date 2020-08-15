@@ -19,11 +19,11 @@ export class BodyComponent implements OnInit {
     // this.activeChatId = '1';
     this.userID = this.userService.getLoggedID();
     if(!this.userID){
-      // this.router.navigate(['login']);
-      // return;
+      this.router.navigate(['login']);
+      return;
     }
-    this.userService.getChats(this.userID).then((x)=>this.chatIDs=x);
-    
+    // this.userService.getChats(this.userID).then((x)=>this.chatIDs=x);
+
     this.activeChatId = this.chatIDs[0];
   }
 
