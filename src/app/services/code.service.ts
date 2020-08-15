@@ -41,6 +41,19 @@ export class CodeService {
     return this.codes;
   }
 
+  public submitCode(chatID : string,
+                    sourceCode : string,
+                    language : string,
+                    submissionInput : string) {
+    var newPostRef = firebase.database().ref('chatCodes/' + chatID).push();
+    newPostRef.set({
+      sourceCode : sourceCode,
+      language : language,
+      submissionInput : submissionInput,
+      codeID : String(newPostRef.key)
+    });
+  }
+
   public refreshCodes() {
     let SEC = (window as any).SEC || ((window as any).SEC = []);
     var js, fjs = document.getElementsByTagName("script")[0];

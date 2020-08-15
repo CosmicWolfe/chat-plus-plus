@@ -38,6 +38,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { SignupComponent } from './signup/signup.component';
 import { AddFriendComponent } from './add-friend/add-friend.component';
 import { AddGroupChatComponent } from './add-group-chat/add-group-chat.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatCardModule } from '@angular/material/card';
 
 
 @NgModule({
@@ -78,7 +80,9 @@ import { AddGroupChatComponent } from './add-group-chat/add-group-chat.component
     MatIconModule,
     MatCheckboxModule,
     MatExpansionModule,
-    MatDialogModule
+    MatDialogModule,
+    MatAutocompleteModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

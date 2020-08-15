@@ -69,9 +69,7 @@ export class UserService {
   public async getChats(uid:string){
     var chats : string[];
     await firebase.database().ref().child("userDetails/"+uid+'/chatList').once('value',(data)=>{
-      if(!data.val())
-        return;
-      chats = Object.keys(data.val());
+      chats = data.val() ? Object.keys(data.val()) : [];
     });
     return chats;
   }
