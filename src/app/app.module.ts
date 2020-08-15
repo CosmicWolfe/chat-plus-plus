@@ -22,6 +22,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { BodyComponent } from './body/body.component';
 import { LoginComponent } from './login/login.component';
@@ -56,6 +57,7 @@ import { MessagingComponent } from './messaging/messaging.component';
     MatButtonModule,
     MatPaginatorModule,
     MatSortModule,
+    MatDialogModule,
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
