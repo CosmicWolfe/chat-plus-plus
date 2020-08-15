@@ -13,11 +13,10 @@
             <!--iterate through the list here-->
             <button *ngFor="let chat of chats" (click)="handleChangeChat(chat)">{{chat}}</button>
         </div>
-
-        <mat-divider></mat-divider>
     </div>
     <!--Your profile-->
-    <div>
-        MY PROFILEEE
+    <div fxLayout="column" fxLayoutGap="16px">
+        <mat-divider></mat-divider>
+        <div style="height: 42px;">MY PROFILEEE</div>
     </div>
 </div>
