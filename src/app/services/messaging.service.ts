@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase'
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,23 +9,26 @@ export class MessagingService {
   messages : Object[];
   currentRef : firebase.database.Reference;
 
-  constructor() { 
+  constructor(private userService : UserService) { 
     this.messages = [];
     this.currentRef = null;
   }
 
-  public addNewChat(authorID : string, memberIDs : string[], privateOtherUserId : string) {
+  public addNewChat(authorID : string, memberIDs : string[], privateOtherUserId : string, chatName : string) {
     if (privateOtherUserId) {
-      var newChatRef = firebase.database().ref('chatDetsils').push();
+      var newChatRef = firebase.database().ref('chatDetails').push();
       let key = newChatRef.key;
       newChatRef.set({
         chatID : key,
-        authorID : authorID
+        authorID : authorID,
+        private : true
       })
-      var chatMembersRef = firebase.database().ref('chatMembers/'+key)
-      for (let i = 0; i < memberIDs.length; i++) {
-        chatMembersRef.set({i: memberIDs[i]});
-      }
+      firebase.database().ref('chatMembers/'+key).set([authorID, privateOtherUserId]);
+      
+      this.userService.addChatToUserChatList(authorID, key);
+      this.userService.addChatToUserChatList(privateOtherUserId, key);
+    } else {
+
     }
   }
 
@@ -46,7 +50,7 @@ export class MessagingService {
   public async getChatMembers(chatID : string) {
     const snapshot = await firebase.database().ref('chatMembers/' + chatID).once('value');
     if (snapshot.val()) {
-      return Object.keys(snapshot.val());
+      return Object.values(snapshot.val());
     }
     return [];
   }

@@ -64,6 +64,7 @@ export class AddFriendComponent implements OnInit {
       let autocompleteOptions = [];
       for (let uid in res) {
         if (autocompleteOptions.length > 5) break;
+        if (this.usersToExclude.includes(uid)) break;
         autocompleteOptions.push(res[uid]);
       }
       this.autocompleteOptions = autocompleteOptions;
@@ -76,7 +77,7 @@ export class AddFriendComponent implements OnInit {
 
   public onConfirm() {
     this.dialogRef.close({
-      chosenUserId: this.chosenUser.userId
+      chosenUserId: this.chosenUser.userID
     });
   }
 

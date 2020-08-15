@@ -69,9 +69,16 @@ export class UserService {
   public async getChats(uid:string){
     var chats : string[];
     await firebase.database().ref().child("userDetails/"+uid+'/chatList').once('value',(data)=>{
-      chats = data.val() ? Object.keys(data.val()) : [];
+      chats = data.val() ? Object.values(data.val()) : [];
     });
     return chats;
+  }
+
+  public async addChatToUserChatList(userId : string, chatId : string) {
+    var chatLists = (await firebase.database().ref('userDetails/' + userId + '/chatList').once('value')).val();
+    if (!chatLists) chatLists = [];
+    chatLists.push(chatId);
+    firebase.database().ref('userDetails/' + userId + '/chatList').set(chatLists);
   }
 
   public async getUserNameSearch(searchString: string, numResults: number) {
