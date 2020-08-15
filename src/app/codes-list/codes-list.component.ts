@@ -25,6 +25,7 @@ export class CodesListComponent implements OnInit {
 
   public expandToggle() {
     this.expanded = !this.expanded;
+    this.chatID = "1";
   }
 
   public inputCode() {
@@ -32,7 +33,9 @@ export class CodesListComponent implements OnInit {
     const dialogRef = this.dialog.open(CodeWidgetComponent, {
       width: '1000px',
       height: '700px',
-      data: null
+      data: {
+        chatID : this.chatID
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {

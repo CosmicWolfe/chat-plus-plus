@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { CodeService } from '../services/code.service';
+import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-code-widget',
@@ -7,22 +8,47 @@ import { CodeService } from '../services/code.service';
   styleUrls: ['./code-widget.component.scss']
 })
 export class CodeWidgetComponent implements OnInit {
-  message : string;
+  sourceCode : string;
+  language : string;
+  submissionInput : string;
 
-  constructor(private codeService : CodeService) { }
+  constructor(public dialogRef: MatDialogRef<CodeWidgetComponent>,
+              @Inject(MAT_DIALOG_DATA) public data,
+              private codeService : CodeService) {
+                //dialogRef.disableClose = true;
+              }
 
   ngOnInit(): void {
-    this.message = "DDD";
-    
+    this.dialogRef.beforeClosed().subscribe(result => {
+      console.log("CLOSED");
+      SEC.ready(() => {
+        SECWidget.events.unsubscribe('beforeSendSubmission', this.beforeSubmit);
+        SECWidget.events.unsubscribe('afterSendSubmission', this.submit);
+      });
+    });
   }
 
   ngAfterViewInit(): void {
     this.codeService.refreshCodes();
-    console.log("PO");
+    SEC.ready(() => {
+      var SECWidget = SEC.widget("submission-widget");
+      SECWidget.events.subscribe('beforeSendSubmission', this.beforeSubmit);
+      SECWidget.events.subscribe('afterSendSubmission', this.submit);
+    });
   }
 
-  public submit(data) {
-    this.message = "X";
-    console.log("PO");
+  public beforeSubmit = (data) => {
+    this.sourceCode = data.submissionSource;
+    this.language = data.submissionLanguage;
+    this.submissionInput = data.submissionInput;
+
+    return true;
+  }
+  public submit = (data) => {
+    console.log(this.data.chatID);
+    this.codeService.submitCode(this.data.chatID, 
+                                this.sourceCode,
+                                this.language,
+                                this.submissionInput);
   }
 }

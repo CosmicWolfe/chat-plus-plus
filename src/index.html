@@ -26,9 +26,7 @@
   SEC_BASE = "compilers.widgets.sphere-engine.com"; 
   (function(d, s, id){ SEC = window.SEC || (window.SEC = []);
     var js, fjs = d.getElementsByTagName(s)[0];
-    console.log("POXX");
     if (d.getElementById(id)) return; 
-    console.log("PSSO");
     
     js = d.createElement(s); js.id = id; 
     js.src = (SEC_HTTPS ? "https" : "http") + "://" + SEC_BASE + "/static/sdk/sdk.js";
