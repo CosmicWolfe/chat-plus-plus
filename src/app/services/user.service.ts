@@ -5,6 +5,7 @@ import * as firebase from 'firebase';
   providedIn: 'root'
 })
 export class UserService {
+  userDetailsRef : firebase.database.Reference;
 
   constructor() { 
     var firebaseConfig = {
@@ -22,6 +23,7 @@ export class UserService {
       firebase.initializeApp(firebaseConfig);
     }
     
+    this.userDetailsRef = firebase.database().ref().child("userDetails");
   }
 
   public isLoggedIn(){
@@ -36,16 +38,35 @@ export class UserService {
     return firebase.auth().currentUser.uid;
   }
 
+  public async getUser(uid: string) {
+    var val;
+    await this.userDetailsRef.child(uid).once('value',(dataSnapshot)=> {
+      val = dataSnapshot.val();
+    });
+    return val;
+  }
+
   public async getProperty(uid:string, type:string){
     var val : string;
-    await firebase.database().ref().child("userDetails/"+uid+"/"+type).once('value',(dataSnapshot)=> {
+    await this.userDetailsRef.child(uid+"/"+type).once('value',(dataSnapshot)=> {
       val = dataSnapshot.val();
     });
     return val;
   }
 
   public async setProperty(uid:string, type:string, val:string){
-    await firebase.database().ref().child("userDetails/"+uid+"/"+type).set({type:val});
+    await this.userDetailsRef.child(uid+"/"+type).set({type:val});
   }
 
+  public async getUserNameSearch(searchString: string, numResults: number) {
+    const autoCorrectedSearchString = searchString.toLocaleLowerCase();
+    const snapshot = await this.userDetailsRef.orderByChild('userName').startAt(autoCorrectedSearchString).endAt(autoCorrectedSearchString + "\u{f8ff}").limitToFirst(numResults).once('value');
+    return snapshot.val();
+  }
+
+  public async getFirstNameSearch(searchString: string, numResults: number) {
+    const autoCorrectedSearchString = searchString.toLocaleLowerCase();
+    const snapshot = await this.userDetailsRef.orderByChild('firstName').startAt(autoCorrectedSearchString).endAt(autoCorrectedSearchString + "\u{f8ff}").limitToFirst(numResults).once('value');
+    return snapshot.val();
+  }
 }
