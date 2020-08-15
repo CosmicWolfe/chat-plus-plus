@@ -5,14 +5,13 @@
     <div fxLayout="column" fxLayoutAlign="space-between start"
          style="height: 100%; min-width: 0px; flex-grow: 1; padding: 12px 0px">
         <!--Top Sidebar-->
-        <app-info-bar style="width: 100%;"></app-info-bar>
+        <app-info-bar style="width: 100%;" [chatID]="activeChatId"></app-info-bar>
         <!--Messaging Part-->
         <app-messaging style="width: 100%; min-height: 0px; flex-grow: 1;"
                        [userID]="userID"
                        [chatID]="activeChatId"></app-messaging>
     </div>
     <!--Right Sidebar, Codes (can expand/collapse)-->
-    <app-codes-list style="width: fit-content; height: 100%;"
-                    [chatID]="activeChatId"
-                    [hidden]="hidden"></app-codes-list>
+    <app-codes-list style="max-width: 300px; height: 100%;"
+                    [chatID]="activeChatId"></app-codes-list>
 </div>

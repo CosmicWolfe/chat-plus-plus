@@ -1,12 +1,18 @@
-<div fxLayout="row" fxLayoutAlign="space-between center" style="padding-left: 16px; width: 100%;">
-    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
+<div fxLayout="row" fxLayoutAlign="space-between center" style="padding-left: 16px; padding-right: 16px; width: 100%;">
+    <div *ngIf="chatID" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
         <!--Group Picture-->
-        <span>pic here</span>
+        <img
+            src="https://i.imgur.com/k2PZLZa.png"
+            alt="Group avatar"
+            style="height: 36px; border-radius: 18px;"
+        />
         <!--Group Name-->
         <div (click)="openDialog()">
-            <span class="truncate" style="font-size: 16px;">GROUP NAME HERE</span>
+            <span class="truncate" style="font-size: 16px;">{{chatName}}</span>
         </div>
     </div>
+
+    <div *ngIf="!chatID">No chat chosen</div>
     
     <button mat-raised-button color="primary" (click) = "logout()">
         Logout

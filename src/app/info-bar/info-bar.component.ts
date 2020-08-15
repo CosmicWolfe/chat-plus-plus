@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { InfoPageComponent } from '../info-page/info-page.component';
 import * as firebase from 'firebase';
 import { Router } from '@angular/router';
+import { MessagingService } from '../services/messaging.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-info-bar',
@@ -10,10 +12,47 @@ import { Router } from '@angular/router';
   styleUrls: ['./info-bar.component.scss']
 })
 export class InfoBarComponent implements OnInit {
+  @Input('chatID') chatID : string;
 
-  constructor(public dialog: MatDialog, private router: Router) { }
+  currentUserId;
+
+  chatName : string;
+
+  constructor(
+    public dialog: MatDialog,
+    private router: Router,
+    private messagingService: MessagingService,
+    private userService: UserService) { }
 
   ngOnInit(): void {
+    this.currentUserId = this.userService.getLoggedID();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
+    //Add '${implements OnChanges}' to the class.
+    if (changes.chatID) {
+      if (this.chatID) {
+        this.updateChatName();
+      }
+    }
+  }
+
+  async updateChatName() {
+    let chatDetails = await this.messagingService.getChatDetails(this.chatID);
+    if (chatDetails.private) {
+      let members = await this.messagingService.getChatMembers(this.chatID);
+      let otherUserId;
+      for (let j = 0; j < members.length; j++) {
+        if (members[j] != this.currentUserId) {
+          otherUserId = members[j];
+          break;
+        }
+      }
+      this.chatName = await this.userService.getProperty(otherUserId, 'userName');
+    } else {
+      this.chatName = chatDetails.title;
+    }
   }
 
   openDialog(): void {
