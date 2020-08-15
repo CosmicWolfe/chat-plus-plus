@@ -25,9 +25,9 @@
                     fxLayoutAlign="center center">group_add</mat-icon>
             </div>
             <!--iterate through the list here-->
-            <div *ngIf="showingFriends">
+            <div *ngIf="showingFriends" fxLayout="column" fxLayoutGap="16px">
                 <div *ngFor="let chat of friendChats" (click)="handleChangeChat(chat)"
-                     fxLayout="row" fxLayoutGap="16px">
+                     fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
                     <img
                         src="https://i.imgur.com/k2PZLZa.png"
                         alt="Group avatar"
@@ -37,9 +37,9 @@
                     <div class="cursor-pointer truncate">{{chat.name}}</div>
                 </div>
             </div>
-            <div *ngIf="!showingFriends">
+            <div *ngIf="!showingFriends" fxLayout="column" fxLayoutGap="16px">
                 <div *ngFor="let chat of groupChats" (click)="handleChangeChat(chat)"
-                     fxLayout="row" fxLayoutGap="16px">
+                     fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
                     <img
                         src="https://i.imgur.com/k2PZLZa.png"
                         alt="Group avatar"
@@ -60,11 +60,11 @@
                 alt="User avatar"
                 class="cursor-pointer"
                 style="height: 36px; border-radius: 18px;"
-                (click) = "goToPage('profile')"
+                (click) = "goToUserPage()"
             />
             <div
                 class="cursor-pointer"
-                (click) = "goToPage('profile')">MY NAME</div>
+                (click) = "goToUserPage()">{{currentUserName}}</div>
         </div>
     </div>
 </div>

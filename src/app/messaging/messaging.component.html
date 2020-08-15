@@ -6,6 +6,7 @@
                 <img
                     src="https://i.imgur.com/k2PZLZa.png"
                     alt="User avatar"
+                    style="width: 36px; height: 36px; border-radius: 18px;"
                 />
                 </div>
                 <div class="received_msg">
@@ -32,6 +33,7 @@
           name="newMessage"
           [(ngModel)]="newMessage"
           style="padding-left: 6px;"
+          (keydown.enter)="sendMessage()"
         />
         <button class="msg_send_btn" type="button" (click)="sendMessage()">
             <mat-icon style="margin-top: 3px;">send</mat-icon>

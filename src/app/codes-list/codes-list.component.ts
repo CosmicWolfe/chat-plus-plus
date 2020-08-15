@@ -1,6 +1,6 @@
 import { Component, OnInit, SimpleChanges, Input } from '@angular/core';
 import { CodeService } from '../services/code.service';
-import { CodeWidgetComponent } from '../code-widget/code-widget.component'
+//import { CodeWidgetComponent } from '../code-widget/code-widget.component'
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
@@ -23,6 +23,12 @@ export class CodesListComponent implements OnInit {
     this.codes = this.codeService.getCodes(this.chatID);
   }
 
+  ngAfterViewInit(): void {
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
+    this.codeService.refreshCodes();
+  }
+
   public expandToggle() {
     this.expanded = !this.expanded;
     this.chatID = "1";
@@ -30,7 +36,7 @@ export class CodesListComponent implements OnInit {
 
   public inputCode() {
     console.log("CLICKED");
-    const dialogRef = this.dialog.open(CodeWidgetComponent, {
+    /*const dialogRef = this.dialog.open(CodeWidgetComponent, {
       width: '1000px',
       height: '700px',
       data: {
@@ -40,7 +46,7 @@ export class CodesListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-    });
+    });*/
   }
 
   ngOnChanges(changes : SimpleChanges): void {

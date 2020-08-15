@@ -1,9 +1,11 @@
-<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px" style="padding-left: 16px; width: inherit;">
-    <!--Group Picture-->
-    <span>pic here</span>
-    <!--Group Name-->
-    <div (click)="openDialog()">
-        <span class="truncate" style="font-size: 16px;">GROUP NAME HERE</span>
+<div fxLayout="row" fxLayoutAlign="space-between center" style="padding-left: 16px; width: 100%;">
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
+        <!--Group Picture-->
+        <span>pic here</span>
+        <!--Group Name-->
+        <div (click)="openDialog()">
+            <span class="truncate" style="font-size: 16px;">GROUP NAME HERE</span>
+        </div>
     </div>
     
     <button mat-raised-button color="primary" (click) = "logout()">

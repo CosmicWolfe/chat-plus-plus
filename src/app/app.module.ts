@@ -10,7 +10,6 @@ import { ChatsComponent } from './chats/chats.component';
 import { InfoBarComponent } from './info-bar/info-bar.component';
 import { InfoPageComponent } from './info-page/info-page.component';
 import { CodesListComponent } from './codes-list/codes-list.component';
-import { CodeWidgetComponent } from './code-widget/code-widget.component';
 import { MessagingComponent } from './messaging/messaging.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -53,7 +52,6 @@ import {MatChipsModule} from '@angular/material/chips';
     InfoBarComponent,
     InfoPageComponent,
     CodesListComponent,
-    CodeWidgetComponent,
     MessagingComponent,
     SignupComponent,
     AddFriendComponent,

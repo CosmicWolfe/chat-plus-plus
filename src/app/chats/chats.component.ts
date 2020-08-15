@@ -20,6 +20,7 @@ export class ChatsComponent implements OnInit {
   @Output('changeChatEvent') changeChatEvent = new EventEmitter();
 
   currentUserId : string;
+  currentUserName : string;
 
   showingFriends = true;
   groupChats = [];
@@ -33,6 +34,9 @@ export class ChatsComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUserId = this.userService.getLoggedID();
+    this.userService.getProperty(this.currentUserId, 'userName').then(uName => {
+      this.currentUserName = uName;
+    })
     this.userService.getChats(this.currentUserId).then(async chats => {
       let groupChats = [];
       let friendChats = [];
@@ -48,7 +52,7 @@ export class ChatsComponent implements OnInit {
               break;
             }
           }
-          chat.name = await this.userService.getProperty(otherUserId, 'firstName');
+          chat.name = await this.userService.getProperty(otherUserId, 'userName');
           friendChats.push(chat);
         } else {
           groupChats.push(chat);
@@ -59,8 +63,8 @@ export class ChatsComponent implements OnInit {
     })
   }
 
-  handleChangeChat(chatId: string)  {
-    this.changeChatEvent.emit(chatId);
+  handleChangeChat(chat)  {
+    this.changeChatEvent.emit(chat.chatID);
   }
 
   changeFriendsView(isFriendsView) {
@@ -85,10 +89,9 @@ export class ChatsComponent implements OnInit {
               break;
             }
           }
-          chat.name = await this.userService.getProperty(otherUserId, 'firstName');
+          chat.name = await this.userService.getProperty(otherUserId, 'userName');
           friendChats.push(chat);
         } else {
-          console.log('isgroup');
           groupChats.push(chat);
         }
       }
@@ -140,7 +143,7 @@ export class ChatsComponent implements OnInit {
     }
   }
 
-  goToPage(pageName:string) : void {
-    this.router.navigate(['user/'+firebase.auth().currentUser.uid]);
+  goToUserPage() : void {
+    this.router.navigate(['user/'+this.currentUserId]);
   }
 }

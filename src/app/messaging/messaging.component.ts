@@ -21,14 +21,15 @@ export class MessagingComponent implements OnInit {
   constructor(private messagingService: MessagingService) { }
 
   ngOnInit(): void {
-    this.messages = this.messagingService.getChats(this.chatID);
+    if (this.chatID)
+      this.messages = this.messagingService.getChats(this.chatID);
     this.ctr = 0;
   }
 
   public sendMessage() {
     if (this.newMessage) {
       this.ctr = (this.ctr % 2) + 1;
-      this.messagingService.addChat(this.chatID, String(this.ctr), this.newMessage)
+      this.messagingService.addChat(this.chatID, this.userID, this.newMessage)
       console.log(this.newMessage);
 
       this.newMessage = "";
@@ -37,7 +38,8 @@ export class MessagingComponent implements OnInit {
 
   ngOnChanges(changes : SimpleChanges): void {
     if (changes.chatID) {
-      this.messages = this.messagingService.getChats(this.chatID);
+      if (this.chatID)
+        this.messages = this.messagingService.getChats(this.chatID);
     }
   }
 }
