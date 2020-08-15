@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import * as firebase from 'firebase'
+import * as firebase from 'firebase';
+import { Router } from '@angular/router';
+import {UserService} from '../services/user.service';
 
 @Component({
   selector: 'app-body',
@@ -10,24 +12,12 @@ export class BodyComponent implements OnInit {
   userID : string;
   activeChatId : string;
 
-  constructor() { }
+  constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
     this.activeChatId = '1';
-    var firebaseConfig = {
-      apiKey: "AIzaSyB7lbkpXJdGH4SDInVfBxWryJc6FXDXZ1E",
-      authDomain: "chat-plus-plus.firebaseapp.com",
-      databaseURL: "https://chat-plus-plus.firebaseio.com",
-      projectId: "chat-plus-plus",
-      storageBucket: "chat-plus-plus.appspot.com",
-      messagingSenderId: "310062968887",
-      appId: "1:310062968887:web:9c55051167e26b20d20fb2",
-      measurementId: "G-P0R44136LE"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-
-    this.userID = "1";
+    this.userID = this.userService.getLoggedID();
+    
   }
 
   changeChat(chatId: string) {

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase'
 
-
 import {MatInputModule} from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormControl, Validators, PatternValidator } from '@angular/forms';
 import {Router} from '@angular/router';
+import {UserService} from '../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -18,34 +18,9 @@ export class LoginComponent implements OnInit {
   password = new FormControl('', [Validators.required, Validators.minLength(6)]);
   hide = true;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
-
-    var firebaseConfig = {
-      apiKey: "AIzaSyB7lbkpXJdGH4SDInVfBxWryJc6FXDXZ1E",
-      authDomain: "chat-plus-plus.firebaseapp.com",
-      databaseURL: "https://chat-plus-plus.firebaseio.com",
-      projectId: "chat-plus-plus",
-      storageBucket: "chat-plus-plus.appspot.com",
-      messagingSenderId: "310062968887",
-      appId: "1:310062968887:web:9c55051167e26b20d20fb2",
-      measurementId: "G-P0R44136LE"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        console.log(user.uid);
-        // User is signed in.
-        console.log(user.email);
-        //user.updateEmail("a"+email);
-      } else {
-        // No user is signed in.
-        console.log("logged out");
-      }
-    });
   }
 
   login(): void {
@@ -57,13 +32,9 @@ export class LoginComponent implements OnInit {
       var errorCode = error.code;
       var errorMessage = error.message;
       console.log(errorMessage);
+    }).then(()=>{
+      this.router.navigate(['..']);
     });
-    
-    if(!firebase.auth().currentUser){
-      //failed to sign in
-      return;
-    }
-    this.router.navigate(['..']);
   }
 
   passwordErrorMessage(){

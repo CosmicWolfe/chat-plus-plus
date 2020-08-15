@@ -36,21 +36,18 @@ export class SignupComponent implements OnInit {
       var errorCode = error.code;
       var errorMessage = error.message;
       console.log(errorMessage);
+    }).then(()=>{
+      var user = firebase.auth().currentUser;
+      var newUserRef = firebase.database().ref().child("userDetails/"+user.uid);
+      newUserRef.set({
+        userID : user.uid,
+        email : this.email.value,
+        userName : this.username,
+        firstName : this.fname,
+        lastName : this.lname,
+      });
+      this.router.navigate(["login"]);
     });
-
-    var user = firebase.auth().currentUser;
-    if(!user){
-      console.log("not done creating?");
-    }
-    var newUserRef = firebase.database().ref().child("userDetails/"+user.uid);
-    newUserRef.set({
-      userID : user.uid,
-      email : this.email.value,
-      userName : this.username,
-      firstName : this.fname,
-      lastName : this.lname,
-    });
-    this.router.navigate(["login"])
   }
 
   passwordErrorMessage(){
