@@ -1,5 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { MessagingService } from '../services/messaging.service';
+import { Component, OnInit, SimpleChanges, Input } from '@angular/core';
+import { CodeService } from '../services/code.service';
+import { CodeWidgetComponent } from '../code-widget/code-widget.component'
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
@@ -15,14 +17,32 @@ export class CodesListComponent implements OnInit {
   codes : Object[];
   expanded : boolean;
 
-  constructor(private messagingService: MessagingService) { }
+  constructor(public dialog: MatDialog, private codeService: CodeService) { }
 
   ngOnInit(): void {
-    this.codes = this.messagingService.getCodes(this.chatID);
+    this.codes = this.codeService.getCodes(this.chatID);
   }
 
   public expandToggle() {
     this.expanded = !this.expanded;
   }
 
+  public inputCode() {
+    console.log("CLICKED");
+    const dialogRef = this.dialog.open(CodeWidgetComponent, {
+      width: '1000px',
+      height: '700px',
+      data: null
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  ngOnChanges(changes : SimpleChanges): void {
+    if (changes.chatID) {
+      this.codes = this.codeService.getCodes(this.chatID);
+    }
+  }
 }
