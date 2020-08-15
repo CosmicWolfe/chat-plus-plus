@@ -97,7 +97,7 @@ export class ChatsComponent implements OnInit {
         usersToExclude.push(this.friendChats[i].privateOtherUserId);
       }
       dialogConfig.data.usersToExclude = usersToExclude;
-      this.dialog.open(AddGroupComponent, dialogConfig);
+      //this.dialog.open(AddGroupComponent, dialogConfig);
     }
   }
 
