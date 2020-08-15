@@ -33,7 +33,8 @@ export class MessagingService {
         newChatRef.set({
           chatID : key,
           authorID : authorID,
-          private : false
+          private : false,
+          title : chatName
         })
         firebase.database().ref('chatMembers/'+key).set(memberIDs);
         memberIDs.forEach((id)=>{

@@ -23,6 +23,7 @@ export class AddGroupChatComponent implements OnInit {
   removable = true;
   invCtrl = new FormControl();
   group:string[];
+  groupID:string[];
   friendsID:string[];
   friends:string[];
   filteredFriends: Observable<string[]>;
@@ -36,9 +37,9 @@ export class AddGroupChatComponent implements OnInit {
     private userService: UserService, 
     private messagingService : MessagingService) {
       this.group = [];
+      this.groupID = [];
       this.friendsID = data.usersToExclude;
       this.friends = [];
-      
       
       console.log('group',this.friends);
      }
@@ -51,6 +52,8 @@ export class AddGroupChatComponent implements OnInit {
   }
 
   async init(){
+    var x = await this.userService.getUserNameSearch("caca",1);
+    console.log("username",x);
     for(let i in this.friendsID){
       var id = this.friendsID[i];
       var username = await this.userService.getProperty(id,"userName");
@@ -61,18 +64,20 @@ export class AddGroupChatComponent implements OnInit {
   async addGroup(){
     if(this.groupName=="")return;
 
-    var ids = [this.authorID];
+    // var ids = [this.authorID];
     
-    for(let i in this.group){
-      var username = this.group[i];
-      var x = await this.userService.getUserNameSearch(username,1);
-      console.log(username,x);
-      if(x)
-        ids.push(Object.keys(x)[0]);
-    }
-    console.log(ids);
+    // for(let i in this.group){
+    //   var username = this.group[i];
+    //   var x = await this.userService.getUserNameSearch(username,1);
+    //   console.log(username,x);
+    //   if(x)
+    //     ids.push(Object.keys(x)[0]);
+    // }
+    // console.log(ids);
     console.log(this.groupName);
-    this.messagingService.addNewChat(this.authorID,ids,"",this.groupName);
+    console.log(this.groupID);
+    this.groupID.push(this.authorID);
+    this.messagingService.addNewChat(this.authorID,this.groupID,"",this.groupName);
     // console.log(this.group);
   }
 
@@ -85,6 +90,8 @@ export class AddGroupChatComponent implements OnInit {
     // Add our fruit
     if ((value || '').trim()) {
       this.group.push(value.trim());
+      var idx = this.friends.indexOf(value.trim());
+      this.groupID.push(this.friendsID[idx]);
     }
 
     // Reset the input value
@@ -100,6 +107,7 @@ export class AddGroupChatComponent implements OnInit {
 
     if (index >= 0) {
       this.group.splice(index, 1);
+      this.groupID.splice(index,1);
     }
   }
 
@@ -108,6 +116,8 @@ export class AddGroupChatComponent implements OnInit {
       return;
 
     this.group.push(event.option.viewValue);
+    var idx = this.friends.indexOf(event.option.viewValue.trim());
+    this.groupID.push(this.friendsID[idx]);
     this.invInput.nativeElement.value = '';
     this.invCtrl.setValue(null);
   }
