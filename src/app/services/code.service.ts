@@ -42,20 +42,27 @@ export class CodeService {
   }
 
   public submitCode(chatID : string,
+                    index : string,
                     sourceCode : string,
                     language : string,
                     submissionInput : string) {
-    var newPostRef = firebase.database().ref('chatCodes/' + chatID).push();
-    newPostRef.set({
+    var ref = firebase.database().ref('chatCodes/' + chatID + "/" + index);
+    ref.set({
       sourceCode : sourceCode,
       language : language,
-      submissionInput : submissionInput,
-      codeID : String(newPostRef.key)
+      submissionInput : submissionInput
     });
   }
 
+  public getSourceCode(chatID : string,
+                       index : string) {
+    return firebase.database().ref('chatCodes/' + chatID + "/" + index + "/sourceCode");
+  }
+
+  SEC : any;
+
   public refreshCodes() {
-    let SEC = (window as any).SEC || ((window as any).SEC = []);
+    this.SEC = (window as any).SEC || ((window as any).SEC = []);
     var js, fjs = document.getElementsByTagName("script")[0];
 
     js = document.createElement("script");

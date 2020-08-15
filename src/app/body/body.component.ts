@@ -27,15 +27,4 @@ export class BodyComponent implements OnInit {
   changeChat(chatId: string) {
     this.activeChatId = chatId;
   }
-
-  hidden : boolean;
-  async click() {
-    await this.delay(10000);
-    this.hidden = true;
-  }
-
-
-  public delay(ms: number) {
-      return new Promise( resolve => setTimeout(resolve, ms) );
-  }
 }

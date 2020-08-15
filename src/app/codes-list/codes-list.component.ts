@@ -12,8 +12,6 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 export class CodesListComponent implements OnInit {
   @Input("chatID") chatID : string;
 
-  text : string;
-  ctr : number;
   codes : Object[];
   expanded : boolean;
 
@@ -27,26 +25,79 @@ export class CodesListComponent implements OnInit {
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     //Add 'implements AfterViewInit' to the class.
     this.codeService.refreshCodes();
+
+    var SECWidget = this.codeService.SEC.widget("A");
+    SECWidget.events.subscribe('beforeSendSubmission', this.submitA.bind(this));
+
+    SECWidget = this.codeService.SEC.widget("B");
+    SECWidget.events.subscribe('beforeSendSubmission', this.submitB.bind(this));
   }
 
   public expandToggle() {
     this.expanded = !this.expanded;
-    this.chatID = "1";
   }
 
-  public inputCode() {
-    console.log("CLICKED");
-    /*const dialogRef = this.dialog.open(CodeWidgetComponent, {
-      width: '1000px',
-      height: '700px',
-      data: {
-        chatID : this.chatID
-      }
-    });
+  public submitA = (data) => {
+    this.chatID = "1";
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });*/
+    this.codeService.submitCode(this.chatID,
+                                "A",
+                                data.submissionSource,
+                                data.submissionLanguage,
+                                data.hasOwnProperty('submissionInput'));
+
+    console.log("SUBMITTED");
+    return true;
+  }
+  public submitB = (data) => {
+    this.chatID = "1";
+
+    this.codeService.submitCode(this.chatID,
+                                "B",
+                                data.submissionSource,
+                                data.submissionLanguage,
+                                data.hasOwnProperty('submissionInput'));
+
+    console.log("SUBMITTED");
+    return true;
+  }
+  public submitC = (data) => {
+    this.chatID = "1";
+
+    this.codeService.submitCode(this.chatID,
+                                "C",
+                                data.submissionSource,
+                                data.submissionLanguage,
+                                data.hasOwnProperty('submissionInput'));
+
+    console.log("SUBMITTED");
+    return true;
+  }
+  public submitD = (data) => {
+    this.chatID = "1";
+
+    this.codeService.submitCode(this.chatID,
+                                "D",
+                                data.submissionSource,
+                                data.submissionLanguage,
+                                data.hasOwnProperty('submissionInput'));
+
+    console.log("SUBMITTED");
+    return true;
+  }
+
+  public submitE (data : any) {
+    this.chatID = "1";
+
+    this.codeService.submitCode(this.chatID,
+                                "E",
+                                data.submissionSource,
+                                data.submissionLanguage,
+                                data.hasOwnProperty('submissionInput'));
+
+      console.log("SUBMITTED");
+
+    return true;
   }
 
   ngOnChanges(changes : SimpleChanges): void {
