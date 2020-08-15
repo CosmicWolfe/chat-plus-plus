@@ -52,18 +52,20 @@ export class LoginComponent implements OnInit {
     console.log("called login");
     if(this.email.invalid || this.password.invalid)return;
 
-    firebase.auth().signInWithEmailAndPassword(this.email.value, this.password.value).catch(function(error) {
+    firebase.auth().signInWithEmailAndPassword(this.email.value, this.password.value)
+    .then(() => {
+      if(!firebase.auth().currentUser){
+        //failed to sign in
+        return;
+      }
+      this.router.navigate(['..']);
+    })
+    .catch(function(error) {
       // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;
       console.log(errorMessage);
     });
-    
-    if(!firebase.auth().currentUser){
-      //failed to sign in
-      return;
-    }
-    this.router.navigate(['..']);
   }
 
   passwordErrorMessage(){
