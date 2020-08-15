@@ -102,8 +102,9 @@ export class CodesListComponent implements OnInit {
   }
 
   ngOnChanges(changes : SimpleChanges): void {
-    if (changes.chatID) {
+    if (changes.chatID && this.chatID) {
       this.codes = this.codeService.getCodes(this.chatID);
+      
     }
   }
 }
