@@ -28,7 +28,17 @@ export class MessagingService {
       this.userService.addChatToUserChatList(authorID, key);
       this.userService.addChatToUserChatList(privateOtherUserId, key);
     } else {
-
+        var newChatRef = firebase.database().ref('chatDetails').push();
+        let key = newChatRef.key;
+        newChatRef.set({
+          chatID : key,
+          authorID : authorID,
+          private : false
+        })
+        firebase.database().ref('chatMembers/'+key).set(memberIDs);
+        memberIDs.forEach((id)=>{
+          this.userService.addChatToUserChatList(id, key);
+        });
     }
   }
 

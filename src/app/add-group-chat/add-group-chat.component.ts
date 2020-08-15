@@ -1,10 +1,12 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Inject } from '@angular/core';
 import { UserService } from '../services/user.service';
 import {FormControl} from '@angular/forms';
 import { Observable } from 'rxjs';
 import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import {map, startWith} from 'rxjs/operators';
+import { MessagingService } from '../services/messaging.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-group-chat',
@@ -13,6 +15,7 @@ import {map, startWith} from 'rxjs/operators';
 })
 export class AddGroupChatComponent implements OnInit {
   
+  authorID:string;
   groupName:string;
 
   visible = true;
@@ -23,20 +26,42 @@ export class AddGroupChatComponent implements OnInit {
   friends:string[];
   filteredFriends: Observable<string[]>;
 
+
   @ViewChild('invInput') invInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
-  constructor( private userService: UserService) { }
+  constructor( public dialogRef: MatDialogRef<AddGroupChatComponent>,
+    @Inject(MAT_DIALOG_DATA) data,
+    private userService: UserService, 
+    private messagingService : MessagingService) {
+      this.group = [];
+      this.friends = data.usersToExclude;
+      console.log('group',this.friends);
+     }
   
   ngOnInit(): void {
-    this.friends = ["ab","cs","asd","wq","qe","paos","lads","qwe","asd","zxcxz","fads","rwe","vcxv","vzx","asdq","dasd"];
-    // this.friends = this.userService.getFriends();
-    this.group = [];
+    // this.friends = ["a","b","c","d","e"];
+    this.authorID = this.userService.getLoggedID();
+    
     this.filteredFriends = this.invCtrl.valueChanges.pipe(startWith(null),map((fruit: string | null) => fruit ? this._filter(fruit) : this.friends.slice()));
   }
 
-  addGroup(){
+  async addGroup(){
+    if(this.groupName=="")return;
+
+    var ids = [this.authorID];
     
+    for(let i in this.group){
+      var username = this.group[i];
+      var x = await this.userService.getUserNameSearch(username,1);
+      console.log(username,x);
+      if(x)
+        ids.push(Object.keys(x)[0]);
+    }
+    console.log(ids);
+    console.log(this.groupName);
+    this.messagingService.addNewChat(this.authorID,ids,"",this.groupName);
+    // console.log(this.group);
   }
 
   add(event: MatChipInputEvent): void {
@@ -69,7 +94,7 @@ export class AddGroupChatComponent implements OnInit {
   selected(event: MatAutocompleteSelectedEvent): void {
     if(this.group.includes(event.option.viewValue))
       return;
-      
+
     this.group.push(event.option.viewValue);
     this.invInput.nativeElement.value = '';
     this.invCtrl.setValue(null);

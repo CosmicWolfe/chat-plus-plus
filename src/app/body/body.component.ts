@@ -15,7 +15,6 @@ export class BodyComponent implements OnInit {
   constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
-    this.activeChatId = '1';
     this.userID = this.userService.getLoggedID();
     if(!this.userID){
       this.router.navigate(['login']);
