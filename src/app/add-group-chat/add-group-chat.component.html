@@ -1,0 +1,14 @@
+<p>add-chat works!</p>
+<mat-form-field appearance="fill" style="width: 250px;">
+    <mat-label>Search people</mat-label>
+    <input matInput [(ngModel)]="searchkey">
+</mat-form-field>
+
+<button mat-raised-button color="primary" (click) = "search()">
+    Search
+</button>
+
+<!-- <mat-action-list>
+    <button mat-list-item *ngFor="let user of userid" (click)="invite(user)"> {{user}} </button>
+</mat-action-list> -->
+

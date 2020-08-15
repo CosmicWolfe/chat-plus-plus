@@ -11,7 +11,6 @@ import {UserService} from '../services/user.service';
 export class BodyComponent implements OnInit {
   userID : string;
   activeChatId : string;
-  chatIDs : string[]
 
   constructor(private router: Router, private userService: UserService) { }
 
@@ -22,9 +21,7 @@ export class BodyComponent implements OnInit {
       this.router.navigate(['login']);
       return;
     }
-    // this.userService.getChats(this.userID).then((x)=>this.chatIDs=x);
 
-    // this.activeChatId = this.chatIDs[0];
   }
 
   changeChat(chatId: string) {

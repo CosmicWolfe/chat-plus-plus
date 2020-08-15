@@ -37,6 +37,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SignupComponent } from './signup/signup.component';
 import { AddFriendComponent } from './add-friend/add-friend.component';
+import { AddGroupChatComponent } from './add-group-chat/add-group-chat.component';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { AddFriendComponent } from './add-friend/add-friend.component';
     CodeWidgetComponent,
     MessagingComponent,
     SignupComponent,
-    AddFriendComponent
+    AddFriendComponent,
+    AddGroupChatComponent
   ],
   imports: [
     BrowserModule,
