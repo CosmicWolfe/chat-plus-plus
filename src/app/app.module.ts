@@ -35,6 +35,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
+import { SignupComponent } from './signup/signup.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     InfoPageComponent,
     CodesListComponent,
     CodeWidgetComponent,
-    MessagingComponent
+    MessagingComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

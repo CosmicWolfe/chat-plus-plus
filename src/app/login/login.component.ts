@@ -4,7 +4,7 @@ import * as firebase from 'firebase'
 
 import {MatInputModule} from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
+import { FormControl, Validators, PatternValidator } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -12,43 +12,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  
-  email : string;
-  password : string;
+
+  email = new FormControl('', [Validators.required, Validators.email]);
+  password = new FormControl('', [Validators.required, Validators.minLength(6)]);
+  hide = true;
 
   constructor() { }
-  
-  public register(): void {
-    console.log("submitted");
-    firebase.auth().createUserWithEmailAndPassword(this.email, this.password).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log(errorMessage);
-    });
-  }
-
-
-  public login(): void {
-    console.log("submitted");
-    firebase.auth().signInWithEmailAndPassword(this.email, this.password).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log(errorMessage);
-      // ...
-    });
-  }
-
-  public logout(): void {
-    console.log("submitted");
-    firebase.auth().signOut().then(function() {
-      // Sign-out successful.
-    }).catch(function(error) {
-      // An error happened.
-      console.log(error);
-    });
-  }
 
   ngOnInit(): void {
 
@@ -65,10 +34,9 @@ export class LoginComponent implements OnInit {
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
 
-
-
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
+        console.log(user.uid);
         // User is signed in.
         console.log(user.email);
         //user.updateEmail("a"+email);
@@ -77,7 +45,33 @@ export class LoginComponent implements OnInit {
         console.log("logged out");
       }
     });
-
   }
 
+  login(): void {
+    console.log("called login");
+    if(this.email.invalid || this.password.invalid)return;
+
+    firebase.auth().signInWithEmailAndPassword(this.email.value, this.password.value).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(errorMessage);
+    });
+    
+    if(!firebase.auth().currentUser){
+      //failed to sign in
+    }
+  }
+
+  passwordErrorMessage(){
+    if(this.password.hasError('required')){
+      return "You must enter a password";
+    }
+    
+    if(this.password.hasError('minlength')){
+      return "You password must be at least 6 characters";
+    }
+
+    return "Invalid password";
+  }
 }
