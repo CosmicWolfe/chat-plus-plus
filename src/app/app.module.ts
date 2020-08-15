@@ -37,6 +37,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SignupComponent } from './signup/signup.component';
 import { AddFriendComponent } from './add-friend/add-friend.component';
+import { AddGroupComponent } from './add-group/add-group.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatCardModule } from '@angular/material/card';
 
 
 @NgModule({
@@ -52,7 +55,8 @@ import { AddFriendComponent } from './add-friend/add-friend.component';
     CodeWidgetComponent,
     MessagingComponent,
     SignupComponent,
-    AddFriendComponent
+    AddFriendComponent,
+    AddGroupComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +80,9 @@ import { AddFriendComponent } from './add-friend/add-friend.component';
     MatIconModule,
     MatCheckboxModule,
     MatExpansionModule,
-    MatDialogModule
+    MatDialogModule,
+    MatAutocompleteModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

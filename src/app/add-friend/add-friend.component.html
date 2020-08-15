@@ -1,1 +1,39 @@
-<p>add-friend works!</p>
+<h1 mat-dialog-title>Add User</h1>
+
+<div mat-dialog-content>
+  <form class="dialog-form mat-typography" fxLayout="column" fxLayoutAlign="start start">
+    <section class="dialog-text"><p>{{dialogText}}</p></section>
+    
+    <div *ngIf="chosenUser" class="dialog-form-field">
+      <div class="dialog-text">
+        <p>User chosen:</p>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between start">
+        <mat-card-header>
+          <img mat-card-avatar *ngIf="chosenUser.imageURL" src={{chosenUser.imageURL}}>
+          <img mat-card-avatar *ngIf="chosenUser.imageURL" src={{chosenUser.imageURL}}>
+          <mat-card-title class="truncate">{{chosenUser.firstName}} {{chosenUser.lastName}}</mat-card-title>
+          <mat-card-subtitle class="truncate">{{chosenUser.userName}}</mat-card-subtitle>
+        </mat-card-header>
+        <button mat-icon-button type="button" (click)="clearChosenUser()">
+          <mat-icon>clear</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <section *ngIf="!chosenUser" class="dialog-form-field-header"><p>Search user to add:</p></section>
+    <mat-form-field *ngIf="!chosenUser" class="dialog-form-field">
+      <input matInput #searchInputRef #searchInput="matInput" [matAutocomplete]="auto" placeholder="Search users by their username" cdkFocusInitial/>
+      <mat-autocomplete #auto>
+        <mat-option *ngFor="let user of autocompleteOptions" (onSelectionChange)="onUserSelected(user)">
+          {{user.userName}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+  </form>
+</div>
+
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="center">
+  <button mat-raised-button type="button" [disabled]="!chosenUser" (click)="onConfirm()">SAVE</button>
+</div>

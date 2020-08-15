@@ -13,6 +13,21 @@ export class MessagingService {
     this.currentRef = null;
   }
 
+  public addNewChat(authorID : string, memberIDs : string[], privateOtherUserId : string) {
+    if (privateOtherUserId) {
+      var newChatRef = firebase.database().ref('chatDetsils').push();
+      let key = newChatRef.key;
+      newChatRef.set({
+        chatID : key,
+        authorID : authorID
+      })
+      var chatMembersRef = firebase.database().ref('chatMembers/'+key)
+      for (let i = 0; i < memberIDs.length; i++) {
+        chatMembersRef.set({i: memberIDs[i]});
+      }
+    }
+  }
+
   public addChat(chatID : string, userID : string, text : string) {
     var newPostRef = firebase.database().ref('chatMessages/' + chatID).push();
     newPostRef.set({
@@ -21,6 +36,19 @@ export class MessagingService {
         timeStamp : Date.now(),
         messageID : String(newPostRef.key)
     });
+  }
+
+  public async getChatDetails(chatID : string) {
+    const snapshot = await firebase.database().ref('chatDetails/' + chatID).once('value');
+    return snapshot.val();
+  }
+
+  public async getChatMembers(chatID : string) {
+    const snapshot = await firebase.database().ref('chatMembers/' + chatID).once('value');
+    if (snapshot.val()) {
+      return Object.keys(snapshot.val());
+    }
+    return [];
   }
 
   public getChats(chatID : string) {
