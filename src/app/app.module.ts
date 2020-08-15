@@ -41,6 +41,7 @@ import { AddGroupChatComponent } from './add-group-chat/add-group-chat.component
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCardModule } from '@angular/material/card';
 import {MatListModule} from '@angular/material/list';
+import {MatChipsModule} from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import {MatListModule} from '@angular/material/list';
     MatDialogModule,
     MatAutocompleteModule,
     MatCardModule,
-    MatListModule
+    MatListModule,
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

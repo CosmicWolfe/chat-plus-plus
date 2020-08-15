@@ -1,18 +1,49 @@
-<p>add-chat works!</p>
-<h1>Group Name</h1>
-
-<mat-form-field appearance="fill" style="width: 250px;">
-    <mat-label>Search people</mat-label>
-    <input matInput [(ngModel)]="searchkey">
+<mat-form-field>
+    <mat-label>Group name</mat-label>
+    <input matInput [(ngModel)]="groupName">
 </mat-form-field>
 
-<button mat-raised-button color="primary" (click) = "search()">
+<!-- <mat-form-field appearance="fill" style="width: 250px;">
+    <mat-label>Search people</mat-label>
+    <input matInput [(ngModel)]="searchkey">
+</mat-form-field> -->
+
+<!-- <button mat-raised-button color="primary" (click) = "search()">
     Search  
+</button> -->
+
+<mat-form-field >
+    <mat-chip-list #chipList>
+      <mat-chip
+        *ngFor="let user of group"
+        [selectable]="selectable"
+        [removable]="removable"
+        (removed)="remove(user)">
+        {{user}}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+      <input
+        placeholder="Invite friend..."
+        #invInput
+        [formControl]="invCtrl"
+        [matAutocomplete]="auto"
+        [matChipInputFor]="chipList"
+        (matChipInputTokenEnd)="add($event)">
+    </mat-chip-list>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+      <mat-option *ngFor="let friend of filteredFriends | async" [value]="friend">
+        {{friend}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+<!-- <mat-selection-list #chosen>
+    <mat-list-option *ngFor="let user of filteredFriends"> {{user}} </mat-list-option>
+</mat-selection-list> -->
+<button mat-raised-button color="primary" (click) = "addGroup()">
+    Create group  
 </button>
 
-<mat-selection-list #chosen>
-    <mat-list-option *ngFor="let user of filtered_friends" (click)="invite(user)"> {{user}} </mat-list-option>
-</mat-selection-list>
-<p>
+<!-- <p>
     {{chosen.selectedOptions.selected.length}} friends selected 
-</p>
+</p> -->
