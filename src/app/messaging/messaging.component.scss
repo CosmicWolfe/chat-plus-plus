@@ -146,13 +146,12 @@ img {
 }
 
 .received_withd_msg {
-	width: 57%;
+	width: 60%;
 }
 
 .mesgs {
-	float: left;
-	padding: 30px 15px 0 25px;
-	width: 60%;
+	padding: 18px 24px 0px;
+	height: 100%;
 }
 
 .sent_msg p {
@@ -172,7 +171,7 @@ img {
 
 .sent_msg {
 	float: right;
-	width: 46%;
+	width: 60%;
 }
 
 .input_msg_write input {
@@ -187,6 +186,8 @@ img {
 .type_msg {
 	border-top: 1px solid #c4c4c4;
 	position: relative;
+	padding-top: 8px;
+	width: 100%;
 }
 
 .msg_send_btn {
@@ -208,7 +209,7 @@ img {
 }
 
 .msg_history {
-	height: 516px;
+	height: inherit;
 	overflow-y: auto;
 }
 

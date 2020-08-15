@@ -1,4 +1,4 @@
-<div class="mesgs">
+<div class="mesgs" fxLayout="column" fxLayoutAlign="start start">
     <div class="msg_history">
         <li class="message" *ngFor="let message of messages">
             <div
@@ -41,9 +41,10 @@
           placeholder="Type a message"
           name="newMessage"
           [(ngModel)]="newMessage"
+          style="padding-left: 6px;"
         />
         <button class="msg_send_btn" type="button" (click)="sendMessage()">
-          <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+            <mat-icon style="margin-top: 3px;">send</mat-icon>
         </button>
       </form>
     </div>
