@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { InfoPageComponent } from '../info-page/info-page.component';
 import * as firebase from 'firebase';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-info-bar',
@@ -10,7 +11,7 @@ import * as firebase from 'firebase';
 })
 export class InfoBarComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -28,13 +29,14 @@ export class InfoBarComponent implements OnInit {
 
   logout(): void {
     
-    console.log(firebase.auth());
+    console.log("logging out");
     firebase.auth().signOut().then(function() {
       // Sign-out successful.
     }).catch(function(error) {
       // An error happened.
       console.log(error);
     });
+    this.router.navigate(['login']);
   }
 
 }

@@ -3,6 +3,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 // import { MatDividerModule } from '@angular/material/divider';
 // import { FormsModule } from '@angular/forms';
 import {Router} from '@angular/router';
+import * as firebase from 'firebase';
+
 
 @Component({
   selector: 'app-chats',
@@ -21,6 +23,6 @@ export class ChatsComponent implements OnInit {
     this.changeChatEvent.emit(chatId);
   }
   goToPage(pageName:string):void{
-    this.router.navigate([`${pageName}`]);
+    this.router.navigate(['user/'+firebase.auth().currentUser.uid]);
   }
 }

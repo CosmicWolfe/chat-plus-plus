@@ -5,6 +5,7 @@ import * as firebase from 'firebase'
 import {MatInputModule} from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormControl, Validators, PatternValidator } from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
   password = new FormControl('', [Validators.required, Validators.minLength(6)]);
   hide = true;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
 
@@ -60,7 +61,9 @@ export class LoginComponent implements OnInit {
     
     if(!firebase.auth().currentUser){
       //failed to sign in
+      return;
     }
+    this.router.navigate(['..']);
   }
 
   passwordErrorMessage(){

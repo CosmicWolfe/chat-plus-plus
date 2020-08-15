@@ -4,7 +4,7 @@ import * as firebase from 'firebase'
 import {MatInputModule} from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormControl, Validators } from '@angular/forms';
-
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -21,7 +21,7 @@ export class SignupComponent implements OnInit {
   password = new FormControl('', [Validators.required, Validators.minLength(6)]);
   hide = true;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -37,15 +37,20 @@ export class SignupComponent implements OnInit {
       var errorMessage = error.message;
       console.log(errorMessage);
     });
+
     var user = firebase.auth().currentUser;
+    if(!user){
+      console.log("not done creating?");
+    }
     var newUserRef = firebase.database().ref().child("userDetails/"+user.uid);
     newUserRef.set({
       userID : user.uid,
+      email : this.email.value,
       userName : this.username,
       firstName : this.fname,
-      lastName : this.lname
+      lastName : this.lname,
     });
-
+    this.router.navigate(["login"])
   }
 
   passwordErrorMessage(){
