@@ -1,20 +1,23 @@
-<div fxLayout="column" fxLayoutGap="16px">
-    <!--Icons for switching between groups/friends-->
-    <div fxLayout="row" fxLayoutAlign="space-around center">
-        <mat-icon>person</mat-icon>
-        <mat-icon>groups</mat-icon>
+<div fxLayout="column" fxLayoutAlign="space-between" style="height: 100%; width: 100%;">
+    <div fxLayout="column" fxLayoutGap="16px">
+        <!--Icons for switching between groups/friends-->
+        <div fxLayout="row" fxLayoutAlign="space-around center">
+            <mat-icon>person</mat-icon>
+            <mat-icon>groups</mat-icon>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <!--Scrollable list of groups/friends-->
+        <div fxLayout="column" fxLayoutGap="16px" style="overflow: scroll">
+            <!--iterate through the list here-->
+            <button *ngFor="let chat of chats" (click)="handleChangeChat(chat)">{{chat}}</button>
+        </div>
+
+        <mat-divider></mat-divider>
     </div>
-
-    <mat-divider></mat-divider>
-
-    <!--Scrollable list of groups/friends-->
-    <div fxLayout="column" fxLayoutGap="16px" style="overflow: scroll">
-        <!--iterate through the list here-->
-        <button *ngFor="let chat of chats" (click)="handleChangeChat(chat)">{{chat}}</button>
-    </div>
-
-    <mat-divider></mat-divider>
-
     <!--Your profile-->
-
+    <div>
+        MY PROFILEEE
+    </div>
 </div>
