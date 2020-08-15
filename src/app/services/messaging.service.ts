@@ -63,19 +63,6 @@ export class MessagingService {
     this.currentRef = firebase.database().ref('chatMessages/' + chatID);
 
     this.messages = [];
-
-    this.currentRef.once('value', (snapshot) => {
-      snapshot.forEach((childSnapshot) => {
-        var childKey = childSnapshot.key;
-        var childData = childSnapshot.val();
-
-        this.messages.push({
-          text : childData.text,
-          userID : childData.userID
-        });
-      });
-    });
-
     this.currentRef.on('child_added', (data) => {
       this.messages.push({
         text : data.val().text,

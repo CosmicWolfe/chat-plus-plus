@@ -32,6 +32,7 @@
           name="newMessage"
           [(ngModel)]="newMessage"
           style="padding-left: 6px;"
+          (keydown.enter)="sendMessage()"
         />
         <button class="msg_send_btn" type="button" (click)="sendMessage()">
             <mat-icon style="margin-top: 3px;">send</mat-icon>
