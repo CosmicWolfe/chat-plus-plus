@@ -37,7 +37,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SignupComponent } from './signup/signup.component';
 import { AddFriendComponent } from './add-friend/add-friend.component';
-import { AddGroupComponent } from './add-group/add-group.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCardModule } from '@angular/material/card';
 
@@ -55,8 +54,7 @@ import { MatCardModule } from '@angular/material/card';
     CodeWidgetComponent,
     MessagingComponent,
     SignupComponent,
-    AddFriendComponent,
-    AddGroupComponent
+    AddFriendComponent
   ],
   imports: [
     BrowserModule,
