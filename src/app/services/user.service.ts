@@ -61,7 +61,7 @@ export class UserService {
   public async getMembers(chatid:string){
     var members : string[];
     await firebase.database().ref().child("chatMembers/"+chatid).once('value',(data)=>{
-      members = Object.values(data.val());
+      members = data.val() ? Object.values(data.val()) : [];
     });
     return members;
   }
@@ -72,6 +72,10 @@ export class UserService {
       chats = data.val() ? Object.values(data.val()) : [];
     });
     return chats;
+  }
+
+  public getChatListRef(userID : string) {
+    return firebase.database().ref().child("userDetails/"+userID+"/chatList");
   }
 
   public async addChatToUserChatList(userId : string, chatId : string) {

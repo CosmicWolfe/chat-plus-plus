@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MessagingService } from '../services/messaging.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class InfoPageComponent implements OnInit {
 
   tags = ['c++','python','html','angular','java','succ','thicc','thighs'];
   constructor(
+    private router: Router,
     private userService: UserService,
     private messagingService: MessagingService,
     public dialogRef: MatDialogRef<InfoPageComponent>,
@@ -35,7 +37,10 @@ export class InfoPageComponent implements OnInit {
       let theMembers = [];
       if (!members) return; 
       for (let i = 0; i < members.length; i++) {
-        theMembers.push(await this.userService.getProperty(members[i], 'userName'));
+        theMembers.push({
+          userName: await this.userService.getProperty(members[i], 'userName'),
+          userId: members[i]
+        });
       }
       this.members = theMembers;
     });
@@ -46,4 +51,7 @@ export class InfoPageComponent implements OnInit {
     //open up your list of friends
   }
 
+  navigateToUser(userId: string) {
+    this.router.navigate(['user/'+userId]);
+  }
 }

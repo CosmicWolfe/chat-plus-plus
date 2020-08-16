@@ -104,10 +104,11 @@ export class MessagingService {
     this.currentRef = firebase.database().ref('chatMessages/' + chatID);
 
     this.messages = [];
-    this.currentRef.on('child_added', (data) => {
+    this.currentRef.on('child_added', async (data) => {
       this.messages.push({
         text : data.val().text,
-        userID : data.val().userID
+        userID : data.val().userID,
+        userName : await this.userService.getProperty(data.val().userID, 'userName')
       })
     });
 

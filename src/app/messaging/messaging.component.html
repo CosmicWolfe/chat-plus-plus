@@ -1,18 +1,18 @@
 <div *ngIf="chatID" class="mesgs" fxLayout="column" fxLayoutAlign="start start">
     <div class="msg_history">
         <li class="message" *ngFor="let message of messages">
-            <div *ngIf="message.userID !== userID" class="incoming_msg">
-                <div class="incoming_msg_img">
+            <div *ngIf="message.userID !== userID" fxLayout="row" fxLayoutGap="6px">
                 <img
                     src="https://i.imgur.com/k2PZLZa.png"
                     alt="User avatar"
                     style="width: 36px; height: 36px; border-radius: 18px;"
                 />
-                </div>
                 <div class="received_msg">
-                <div class="received_withd_msg">
-                    <p>{{ message.text }}</p>
-                </div>
+                    <div class="received_withd_msg">
+                        <div style="font-size: x-small;">
+                            {{message.userName}}</div>
+                        <p>{{ message.text }}</p>
+                    </div>
                 </div>
             </div>
             
