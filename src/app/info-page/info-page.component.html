@@ -1,11 +1,13 @@
-<div fxLayout="column" fxLayoutAlign="space-between" style="height: 100%; width: 100%;">
+<div
+    fxLayout="column" fxLayoutAlign="space-between"
+    style="height: 100%; width: 100%; background-color: #adadff;">
     <div fxLayout="row" fxLayoutGap="16px">
         <img
             src="https://i.imgur.com/k2PZLZa.png"
             alt="Group avatar"
             style="height: 48px; border-radius: 24px;"
         />
-        <div class="truncate" style="font-size: 24px;">{{chatDetails.title}}</div>
+        <div *ngIf="chatDetails" class="truncate" style="font-size: 24px;">{{chatDetails.title}}</div>
     </div>
     <div fxLayout="column" fxLayoutGap="16px">
         <div>Members</div>
@@ -18,25 +20,25 @@
             <div class="truncate">{{member.userName}}</div>
         </div>
     </div>
-  <!-- list of tags displayed here -->
-  <!-- <mat-icon>groups</mat-icon>
-  <button (click)="invitefriends()">invite</button>
-  <div style="height: 600px;">
-    <div class="center">
-      <Scrollable list of groups/friends>
-      <div class = "groupinfo">
-          <div fxLayout="row" fxLayoutGap="16px" >
-            <button *ngFor="let tag of tags">{{tag}}</button>
-          </div>
+    <!-- list of tags displayed here -->
+    <!-- <mat-icon>groups</mat-icon>
+    <button (click)="invitefriends()">invite</button>
+    <div style="height: 600px;">
+        <div class="center">
+            <Scrollable list of groups/friends>
+            <div class = "groupinfo">
+                <div fxLayout="row" fxLayoutGap="16px" >
+                    <button *ngFor="let tag of tags">{{tag}}</button>
+                </div>
 
-          <mat-divider></mat-divider>
+                <mat-divider></mat-divider>
 
-            <div fxLayout="column" fxLayoutGap="16px" >
-              < iterate through the list here>
-              <!<button *ngFor="let user of userid">{{user}}</button> >
+                  <div fxLayout="column" fxLayoutGap="16px" >
+                      < iterate through the list here>
+                      <!<button *ngFor="let user of userid">{{user}}</button> >
 
+                  </div>
             </div>
-      </div>
-    </div>
-  </div> -->
+        </div>
+    </div> -->
 </div>

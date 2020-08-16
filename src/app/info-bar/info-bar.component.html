@@ -1,13 +1,17 @@
-<div fxLayout="row" fxLayoutAlign="space-between center" style="padding-left: 16px; padding-right: 16px; width: 100%;">
+<div fxLayout="row" fxLayoutAlign="space-between center" style="padding: 0px 16px 12px; width: 100%;">
     <div *ngIf="chatID" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
         <!--Group Picture-->
         <img
             src="https://i.imgur.com/k2PZLZa.png"
             alt="Group avatar"
             style="height: 36px; border-radius: 18px;"
+            [class.cursor-pointer]="!isPrivateChat"
+            (click)="openDialog()"
         />
         <!--Group Name-->
-        <div (click)="openDialog()">
+        <div
+            (click)="openDialog()"
+            [class.cursor-pointer]="!isPrivateChat">
             <span class="truncate" style="font-size: 16px;">{{chatName}}</span>
         </div>
     </div>

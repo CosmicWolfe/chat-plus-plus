@@ -17,6 +17,7 @@ export class InfoBarComponent implements OnInit {
   currentUserId;
 
   chatName : string;
+  isPrivateChat : boolean;
 
   constructor(
     public dialog: MatDialog,
@@ -41,6 +42,7 @@ export class InfoBarComponent implements OnInit {
   async updateChatName() {
     let chatDetails = await this.messagingService.getChatDetails(this.chatID);
     if (chatDetails.private) {
+      this.isPrivateChat = true;
       let members = await this.messagingService.getChatMembers(this.chatID);
       let otherUserId;
       for (let j = 0; j < members.length; j++) {
@@ -56,6 +58,7 @@ export class InfoBarComponent implements OnInit {
   }
 
   openDialog(): void {
+    if (this.isPrivateChat) return;
     const dialogConfig = new MatDialogConfig();
     dialogConfig.minWidth = 235;
     dialogConfig.width = "400px";

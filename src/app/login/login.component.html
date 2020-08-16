@@ -1,37 +1,41 @@
-<div style="height: 100vh; width: 100vw" fxLayout="column" fxLayoutAlign="center center">
-    <h2>Login</h2>
-    <form>
-        <div class="form-group">
-            <mat-form-field appearance="fill" style="width: 250px;">
-                <mat-label>Enter your email</mat-label>
-                
-                <input matInput [formControl]="email" required>
-                <mat-error *ngIf="email.invalid">Invalid email</mat-error>
+<div
+    style="height: 100vh; width: 100vw; background-color: #adadff;"
+    fxLayout="column" fxLayoutAlign="center center">
+    <div style="background-color: white; padding: 24px;">
+        <h2>Login</h2>
+        <form>
+            <div class="form-group">
+                <mat-form-field appearance="fill" style="width: 250px;">
+                    <mat-label>Enter your email</mat-label>
+                    
+                    <input matInput [formControl]="email" required>
+                    <mat-error *ngIf="email.invalid">Invalid email</mat-error>
 
-            </mat-form-field>
-        </div>
+                </mat-form-field>
+            </div>
 
-        <div class="form-group">
-            <mat-form-field appearance="fill" style="width: 250px;">
-                <mat-label>Enter your password</mat-label>
-                
-                <input matInput [type]="hide ? 'password' : 'text'" 
-                                [formControl]="password" required>
-                <button mat-icon-button matSuffix
-                    (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                    [attr.aria-pressed]="hide" type="button">
-                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <div class="form-group">
+                <mat-form-field appearance="fill" style="width: 250px;">
+                    <mat-label>Enter your password</mat-label>
+                    
+                    <input matInput [type]="hide ? 'password' : 'text'" 
+                                    [formControl]="password" required>
+                    <button mat-icon-button matSuffix
+                        (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide" type="button">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="password.invalid">{{passwordErrorMessage()}}</mat-error>
+
+                </mat-form-field>
+            </div>
+
+            <div class="form-group" style="width: 250px;" fxLayout="row" fxLayoutAlign="space-around center">
+                <button mat-raised-button color="primary" (click) = "login()">
+                    Login
                 </button>
-                <mat-error *ngIf="password.invalid">{{passwordErrorMessage()}}</mat-error>
-
-            </mat-form-field>
-        </div>
-
-        <div class="form-group" style="width: 250px;" fxLayout="row" fxLayoutAlign="space-around center">
-            <button mat-raised-button color="primary" (click) = "login()">
-                Login
-            </button>
-            <a routerLink="/signup">Sign up</a>
-        </div>
-    </form>
+                <a routerLink="/signup">Sign up</a>
+            </div>
+        </form>
+    </div>
 </div>
