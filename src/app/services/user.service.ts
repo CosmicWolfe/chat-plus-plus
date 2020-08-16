@@ -61,7 +61,7 @@ export class UserService {
   public async getMembers(chatid:string){
     var members : string[];
     await firebase.database().ref().child("chatMembers/"+chatid).once('value',(data)=>{
-      members = Object.keys(data.val());
+      members = Object.values(data.val());
     });
     return members;
   }

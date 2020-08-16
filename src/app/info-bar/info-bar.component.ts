@@ -53,6 +53,7 @@ export class InfoBarComponent implements OnInit {
       }
       this.chatName = await this.userService.getProperty(otherUserId, 'userName');
     } else {
+      this.isPrivateChat = false;
       this.chatName = chatDetails.title;
     }
   }
