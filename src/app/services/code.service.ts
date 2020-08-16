@@ -54,9 +54,10 @@ export class CodeService {
     });
   }
 
-  public getSourceCode(chatID : string,
-                       index : string) {
-    return firebase.database().ref('chatCodes/' + chatID + "/" + index + "/sourceCode");
+  public getCode(chatID : string,
+                 index : string) {
+                   console.log('chatCodes/' + chatID + "/" + index);
+    return firebase.database().ref('chatCodes/' + chatID + "/" + index);
   }
 
   SEC : any;
@@ -73,5 +74,9 @@ export class CodeService {
     let SEC_BASE = "compilers.widgets.sphere-engine.com"; 
     js.src = (SEC_HTTPS ? "https" : "http") + "://" + SEC_BASE + "/static/sdk/sdk.js";
     fjs.parentNode.insertBefore(js, fjs);
+  }
+
+  public ready(e : any) : boolean {
+    return "loading"!=document.readyState&&"interactive"!=document.readyState?e():window.addEventListener("load",e);
   }
 }
