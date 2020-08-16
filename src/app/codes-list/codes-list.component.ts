@@ -18,7 +18,6 @@ export class CodesListComponent implements OnInit {
   constructor(public dialog: MatDialog, private codeService: CodeService) { }
 
   ngOnInit(): void {
-    this.codes = this.codeService.getCodes(this.chatID);
   }
 
   SecWidget : any[];
@@ -42,6 +41,7 @@ export class CodesListComponent implements OnInit {
   }
 
   public submitA = (data) => {
+    console.log("SUBMITTED");
     this.codeService.submitCode(this.chatID,
                                 "A",
                                 data.submissionSource,
@@ -71,14 +71,14 @@ export class CodesListComponent implements OnInit {
     return true;
   }
 
+
   async ngOnChanges(changes : SimpleChanges) {
     if (changes.chatID && this.chatID) {
       let widgets = ["A", "B", "C"];
       let ctr = 0;
       for (let index of widgets) {
         var code = this.codeService.getCode(this.chatID, index);
-        var SECWidget = this.codeService.SEC.widget(index);
-        
+
         let sourceCode : string;
         let compiler : number;
         let submissionInput : string;

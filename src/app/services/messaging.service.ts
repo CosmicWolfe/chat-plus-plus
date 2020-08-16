@@ -27,6 +27,21 @@ export class MessagingService {
       
       this.userService.addChatToUserChatList(authorID, key);
       this.userService.addChatToUserChatList(privateOtherUserId, key);
+      firebase.database().ref('chatCodes/'+key+"/A").set({
+        language : 41,
+        sourceCode : "",
+        submissionInput : ""
+      });
+      firebase.database().ref('chatCodes/'+key+"/B").set({
+        language : 116,
+        sourceCode : "",
+        submissionInput : ""
+      });
+      firebase.database().ref('chatCodes/'+key+"/C").set({
+        language : 41,
+        sourceCode : "",
+        submissionInput : ""
+      });
     } else {
         var newChatRef = firebase.database().ref('chatDetails').push();
         let key = newChatRef.key;
@@ -39,6 +54,21 @@ export class MessagingService {
         firebase.database().ref('chatMembers/'+key).set(memberIDs);
         memberIDs.forEach((id)=>{
           this.userService.addChatToUserChatList(id, key);
+        });
+        firebase.database().ref('chatCodes/'+key+"/A").set({
+          language : 41,
+          sourceCode : "",
+          submissionInput : ""
+        });
+        firebase.database().ref('chatCodes/'+key+"/B").set({
+          language : 116,
+          sourceCode : "",
+          submissionInput : ""
+        });
+        firebase.database().ref('chatCodes/'+key+"/C").set({
+          language : 41,
+          sourceCode : "",
+          submissionInput : ""
         });
     }
   }
