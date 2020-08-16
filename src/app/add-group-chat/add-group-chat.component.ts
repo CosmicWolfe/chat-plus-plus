@@ -78,6 +78,8 @@ export class AddGroupChatComponent implements OnInit {
     console.log(this.groupID);
     this.groupID.push(this.authorID);
     this.messagingService.addNewChat(this.authorID,this.groupID,"",this.groupName);
+
+    this.dialogRef.close();
     // console.log(this.group);
   }
 
