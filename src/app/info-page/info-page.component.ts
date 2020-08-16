@@ -32,10 +32,12 @@ export class InfoPageComponent implements OnInit {
       this.chatDetails = result;
     })
     this.userService.getMembers(this.chatID).then(async members => {
+      let theMembers = [];
       if (!members) return; 
       for (let i = 0; i < members.length; i++) {
-        this.members.push(await this.userService.getProperty(members[i], 'userName'));
+        theMembers.push(await this.userService.getProperty(members[i], 'userName'));
       }
+      this.members = theMembers;
     });
   }
   
