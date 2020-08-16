@@ -2,13 +2,16 @@
     <!--Expand/Collapse Button (change to chevron_right if open)-->
     <div fxLayout="column" 
          fxLayoutAlign="center center"
-        style="height: inherit; background-color: grey;">
-        <mat-icon (click)="expandToggle()">chevron_left</mat-icon>
+        class="cursor-pointer"
+        style="height: inherit; background-color: grey;"
+        (click)="expandToggle()">
+        <mat-icon *ngIf="!expanded">chevron_left</mat-icon>
+        <mat-icon *ngIf="expanded">chevron_right</mat-icon>
     </div>
     <!-- Code Lists -->
     <div class="code-list"
          style="height: inherit; overflow-y: scroll"
-         [hidden]="expanded"
+         [class.hiddenn]="expanded"
          fxLayout="column"
          fxLayoutGap="24px"> 
         <div class="side-bar">
