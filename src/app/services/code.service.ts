@@ -5,40 +5,10 @@ import * as firebase from 'firebase'
   providedIn: 'root'
 })
 export class CodeService {
-  codes : Object[];
   codesRef : firebase.database.Reference;
 
   constructor() { 
-    this.codes = [];
     this.codesRef = null;
-  }
-
-  public getCodes(chatID : string) {
-    if (this.codesRef) {
-      this.codesRef.off();
-    }
-    
-    this.codesRef = firebase.database().ref('chatCodes/' + chatID);
-    
-    this.codes = [];
-    this.codesRef.once('value', (snapshot) => {
-      snapshot.forEach((childSnapshot) => {
-        var childKey = childSnapshot.key;
-        var childData = childSnapshot.val();
-        
-        this.codes.push({
-          submissionID : childData.submissionID
-        });
-      });
-    });
-
-    this.codesRef.on('child_added', (data) => {
-      this.codes.push({
-        submissionID : data.val().submissionID
-      });
-    });
-
-    return this.codes;
   }
 
   public submitCode(chatID : string,
@@ -54,9 +24,10 @@ export class CodeService {
     });
   }
 
-  public getSourceCode(chatID : string,
-                       index : string) {
-    return firebase.database().ref('chatCodes/' + chatID + "/" + index + "/sourceCode");
+  public getCode(chatID : string,
+                 index : string) {
+                   console.log('chatCodes/' + chatID + "/" + index);
+    return firebase.database().ref('chatCodes/' + chatID + "/" + index);
   }
 
   SEC : any;
@@ -73,5 +44,9 @@ export class CodeService {
     let SEC_BASE = "compilers.widgets.sphere-engine.com"; 
     js.src = (SEC_HTTPS ? "https" : "http") + "://" + SEC_BASE + "/static/sdk/sdk.js";
     fjs.parentNode.insertBefore(js, fjs);
+  }
+
+  public ready(e : any) : boolean {
+    return "loading"!=document.readyState&&"interactive"!=document.readyState?e():window.addEventListener("load",e);
   }
 }

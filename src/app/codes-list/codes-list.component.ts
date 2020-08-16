@@ -18,19 +18,21 @@ export class CodesListComponent implements OnInit {
   constructor(public dialog: MatDialog, private codeService: CodeService) { }
 
   ngOnInit(): void {
-    this.codes = this.codeService.getCodes(this.chatID);
   }
 
+  SecWidget : any[];
   ngAfterViewInit(): void {
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     //Add 'implements AfterViewInit' to the class.
     this.codeService.refreshCodes();
-
-    var SECWidget = this.codeService.SEC.widget("A");
-    SECWidget.events.subscribe('beforeSendSubmission', this.submitA.bind(this));
-
-    SECWidget = this.codeService.SEC.widget("B");
-    SECWidget.events.subscribe('beforeSendSubmission', this.submitB.bind(this));
+    this.SecWidget = [null, null, null];
+    
+      this.SecWidget[0] = this.codeService.SEC.widget("A");
+      this.SecWidget[0].events.subscribe('beforeSendSubmission', this.submitA.bind(this));
+      this.SecWidget[1] = this.codeService.SEC.widget("B");
+      this.SecWidget[1].events.subscribe('beforeSendSubmission', this.submitB.bind(this));
+      this.SecWidget[2] = this.codeService.SEC.widget("C");
+      this.SecWidget[2].events.subscribe('beforeSendSubmission', this.submitC.bind(this));
   }
 
   public expandToggle() {
@@ -39,71 +41,58 @@ export class CodesListComponent implements OnInit {
   }
 
   public submitA = (data) => {
-    this.chatID = "1";
-
+    console.log("SUBMITTED");
     this.codeService.submitCode(this.chatID,
                                 "A",
                                 data.submissionSource,
                                 data.submissionLanguage,
-                                data.hasOwnProperty('submissionInput'));
-
+                                data.submissionInput);
     console.log("SUBMITTED");
     return true;
   }
   public submitB = (data) => {
-    this.chatID = "1";
-
     this.codeService.submitCode(this.chatID,
                                 "B",
                                 data.submissionSource,
                                 data.submissionLanguage,
-                                data.hasOwnProperty('submissionInput'));
+                                data.submissionInput);
 
     console.log("SUBMITTED");
     return true;
   }
   public submitC = (data) => {
-    this.chatID = "1";
-
     this.codeService.submitCode(this.chatID,
                                 "C",
                                 data.submissionSource,
                                 data.submissionLanguage,
-                                data.hasOwnProperty('submissionInput'));
-
-    console.log("SUBMITTED");
-    return true;
-  }
-  public submitD = (data) => {
-    this.chatID = "1";
-
-    this.codeService.submitCode(this.chatID,
-                                "D",
-                                data.submissionSource,
-                                data.submissionLanguage,
-                                data.hasOwnProperty('submissionInput'));
+                                data.submissionInput);
 
     console.log("SUBMITTED");
     return true;
   }
 
-  public submitE (data : any) {
-    this.chatID = "1";
 
-    this.codeService.submitCode(this.chatID,
-                                "E",
-                                data.submissionSource,
-                                data.submissionLanguage,
-                                data.hasOwnProperty('submissionInput'));
+  async ngOnChanges(changes : SimpleChanges) {
+    if (changes.chatID && this.chatID) {
+      let widgets = ["A", "B", "C"];
+      let ctr = 0;
+      for (let index of widgets) {
+        var code = this.codeService.getCode(this.chatID, index);
 
-      console.log("SUBMITTED");
-
-    return true;
-  }
-
-  ngOnChanges(changes : SimpleChanges): void {
-    if (changes.chatID) {
-      this.codes = this.codeService.getCodes(this.chatID);
+        let sourceCode : string;
+        let compiler : number;
+        let submissionInput : string;
+        let snapshot = await code.child('sourceCode').once('value');
+        sourceCode = snapshot.val();
+        snapshot = await code.child('language').once('value');
+        compiler = snapshot.val();
+        snapshot = await code.child('submissionInput').once('value');
+        submissionInput = snapshot.val();
+        this.SecWidget[ctr].loadSourceCode(compiler,
+          sourceCode,
+          submissionInput);
+          ctr++;
+      }
     }
   }
 }
