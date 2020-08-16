@@ -26,6 +26,8 @@ export class ChatsComponent implements OnInit {
   groupChats = [];
   friendChats = [];
 
+  chatListRef;
+
   constructor(
     private router : Router,
     private dialog : MatDialog,
@@ -37,29 +39,25 @@ export class ChatsComponent implements OnInit {
     this.userService.getProperty(this.currentUserId, 'userName').then(uName => {
       this.currentUserName = uName;
     })
-    this.userService.getChats(this.currentUserId).then(async chats => {
-      let groupChats = [];
-      let friendChats = [];
-      for (let i = 0; i < chats.length; i++) {
-        let chat = await this.messagingService.getChatDetails(chats[i]);
-        if (!chat) continue;
-        if (chat.private) {
-          let otherUserId;
-          let members = await this.messagingService.getChatMembers(chat.chatID);
-          for (let i = 0; i < members.length; i++) {
-            if (members[i] != this.currentUserId) {
-              otherUserId = members[i];
-              break;
-            }
+
+    this.chatListRef = this.userService.getChatListRef(this.currentUserId);
+    this.chatListRef.on('child_added', async (data) => {
+      let chat = await this.messagingService.getChatDetails(data.val());
+      if (!chat) return;
+      if (chat.private) {
+        let otherUserId;
+        let members = await this.messagingService.getChatMembers(chat.chatID);
+        for (let i = 0; i < members.length; i++) {
+          if (members[i] != this.currentUserId) {
+            otherUserId = members[i];
+            break;
           }
-          chat.name = await this.userService.getProperty(otherUserId, 'userName');
-          friendChats.push(chat);
-        } else {
-          groupChats.push(chat);
         }
+        chat.name = await this.userService.getProperty(otherUserId, 'userName');
+        this.friendChats.push(chat);
+      } else {
+        this.groupChats.push(chat);
       }
-      this.friendChats = friendChats;
-      this.groupChats = groupChats;
     })
   }
 
@@ -69,35 +67,6 @@ export class ChatsComponent implements OnInit {
 
   changeFriendsView(isFriendsView) {
     this.showingFriends = isFriendsView;
-    this.userService.getChats(this.currentUserId).then(async chats => {
-      console.log('chats');
-      console.log(chats);
-      let groupChats = [];
-      let friendChats = [];
-      for (let i = 0; i < chats.length; i++) {
-        let chat = await this.messagingService.getChatDetails(chats[i]);
-        console.log('chat...');
-        console.log(chat);
-        if (!chat) continue;
-        if (chat.private) {
-          console.log('isprivate');
-          let members = await this.messagingService.getChatMembers(chat.chatID);
-          let otherUserId;
-          for (let i = 0; i < members.length; i++) {
-            if (members[i] != this.currentUserId) {
-              otherUserId = members[i];
-              break;
-            }
-          }
-          chat.name = await this.userService.getProperty(otherUserId, 'userName');
-          friendChats.push(chat);
-        } else {
-          groupChats.push(chat);
-        }
-      }
-      this.friendChats = friendChats;
-      this.groupChats = groupChats;
-    })
   }
 
   async addChat() {
@@ -125,11 +94,7 @@ export class ChatsComponent implements OnInit {
       const dialogRef = this.dialog.open(AddFriendComponent, dialogConfig);
       const dialogSub = dialogRef.afterClosed().subscribe(res => {
         dialogSub.unsubscribe();
-        console.log('afterclose');
-        console.log(res);
         if (res) {
-          console.log('res');
-          console.log(res);
           let uid = res.chosenUserId;
           this.messagingService.addNewChat(this.currentUserId, [], uid, res.chatName);
         }
