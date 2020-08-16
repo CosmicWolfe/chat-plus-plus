@@ -17,7 +17,7 @@ export class InfoBarComponent implements OnInit {
   currentUserId;
 
   chatName : string;
-  isPrivateChat : boolean;
+  isPrivateChat : boolean = false;
 
   constructor(
     public dialog: MatDialog,
@@ -53,6 +53,7 @@ export class InfoBarComponent implements OnInit {
       }
       this.chatName = await this.userService.getProperty(otherUserId, 'userName');
     } else {
+      this.isPrivateChat = false;
       this.chatName = chatDetails.title;
     }
   }
@@ -70,8 +71,6 @@ export class InfoBarComponent implements OnInit {
   }
 
   logout(): void {
-    
-    console.log("logging out");
     firebase.auth().signOut().then(function() {
       // Sign-out successful.
     }).catch(function(error) {
