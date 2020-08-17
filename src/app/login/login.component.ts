@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    console.log("called login");
+    console.log("Logging in ...");
     if(this.email.invalid || this.password.invalid)return;
 
     firebase.auth().signInWithEmailAndPassword(this.email.value, this.password.value)

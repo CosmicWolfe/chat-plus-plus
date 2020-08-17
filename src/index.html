@@ -10,8 +10,6 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body class="mat-typography">
-  
-
   <!-- The core Firebase JS SDK is always required and must be listed first -->
   <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-app.js"></script>
 
@@ -20,19 +18,5 @@
   <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-analytics.js"></script>
 
   <app-root></app-root>
-
 </body>
-<script>SEC_HTTPS = true;
-  SEC_BASE = "compilers.widgets.sphere-engine.com"; 
-  (function(d, s, id){ SEC = window.SEC || (window.SEC = []);
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return; 
-    
-    js = d.createElement(s); js.id = id; 
-    js.src = (SEC_HTTPS ? "https" : "http") + "://" + SEC_BASE + "/static/sdk/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);   
-  }(document, "script", "sphere-engine-compilers-jssdk"));
-SEC.ready=function(e){"loading"!=document.readyState&&"interactive"!=document.readyState?e():window.addEventListener("load",e)};
-</script>
-
 </html>

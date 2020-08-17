@@ -11,8 +11,9 @@ import { InfoBarComponent } from './info-bar/info-bar.component';
 import { InfoPageComponent } from './info-page/info-page.component';
 import { CodesListComponent } from './codes-list/codes-list.component';
 import { MessagingComponent } from './messaging/messaging.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { SignupComponent } from './signup/signup.component';
+import { AddFriendComponent } from './add-friend/add-friend.component';
+import { AddGroupChatComponent } from './add-group-chat/add-group-chat.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -34,13 +35,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
-import { SignupComponent } from './signup/signup.component';
-import { AddFriendComponent } from './add-friend/add-friend.component';
-import { AddGroupChatComponent } from './add-group-chat/add-group-chat.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCardModule } from '@angular/material/card';
-import {MatListModule} from '@angular/material/list';
-import {MatChipsModule} from '@angular/material/chips';
+import { MatListModule } from '@angular/material/list';
+import { MatChipsModule } from '@angular/material/chips';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
