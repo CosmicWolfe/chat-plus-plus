@@ -38,7 +38,7 @@ export class MessagingService {
         submissionInput : ""
       });
       firebase.database().ref('chatCodes/'+key+"/C").set({
-        language : 41,
+        language : 10,
         sourceCode : "",
         submissionInput : ""
       });
@@ -66,7 +66,7 @@ export class MessagingService {
           submissionInput : ""
         });
         firebase.database().ref('chatCodes/'+key+"/C").set({
-          language : 41,
+          language : 10,
           sourceCode : "",
           submissionInput : ""
         });

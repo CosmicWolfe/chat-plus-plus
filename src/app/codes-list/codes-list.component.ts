@@ -49,6 +49,13 @@ export class CodesListComponent implements OnInit {
         this.SecWidget[0] = SEC.widget("A");
         this.SecWidget[1] = SEC.widget("B");
         this.SecWidget[2] = SEC.widget("C");
+        for (let i = 0; i < 3; i++) {
+          this.SecWidget[i].config({
+            compilers: {
+                list: [10, 41, 116]
+            }
+          });
+        }
         this.SecWidget[0].events.subscribe('beforeSendSubmission', this.submitA);
         this.SecWidget[1].events.subscribe('beforeSendSubmission', this.submitB);
         this.SecWidget[2].events.subscribe('beforeSendSubmission', this.submitC);

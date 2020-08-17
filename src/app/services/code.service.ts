@@ -15,7 +15,6 @@ export class CodeService {
     this.SecWidget = [null, null, null];
   }
 
-
   public submitCode(chatID : string,
                     index : string,
                     sourceCode : string,
